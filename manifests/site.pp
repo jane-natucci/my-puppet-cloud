@@ -23,7 +23,7 @@ node 'node3.natucci.de' {
   class {'hdp::agent':}
 }
 
-node 'osmaster.natucci.de' {
+node 'master.openshift.natucci.de' {
   class { selinux:
     mode => 'permissive',
     type => 'targeted',
@@ -33,7 +33,7 @@ node 'osmaster.natucci.de' {
   class {'openshift::default':}
 }
 
-node 'osnode1.natucci.de' {
+node 'node1.openshift.natucci.de' {
   class { selinux:
     mode => 'permissive',
     type => 'targeted',
