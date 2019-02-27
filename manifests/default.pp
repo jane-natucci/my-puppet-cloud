@@ -1,17 +1,22 @@
 class cloud::default {
   Package {ensure => present}
 
-  package {'vim-enhanced':}
+  $dependencies = [
+    'epel-release',
+    'wget',
+    'net-tools',
+    'bind-utils',
+    'yum-utils',
+    'bash-completion',
+    'vim-enhanced',
+    'git',
+    'ipa-client',
+    'telnet',
+    'traceroute',
+    'firewalld',
+    ]
 
-  package {'ipa-client':}
-
-  package {'git':}
-
-  package {'telnet':}
-
-  package {'traceroute':}
-
-  package {'firewalld':}
+  package {$dependencies:} ->
 
   service {'firewalld':
     ensure => running,
