@@ -18,6 +18,11 @@ class cloud::default {
     require => Package['firewalld'];
   }
 
+  service { 'puppet':
+    ensure => 'running',
+    enable => 'true',
+  }
+
   file {'/root/.ssh/':
     ensure => directory
   }
