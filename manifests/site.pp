@@ -1,0 +1,48 @@
+node 'dns.natucci.de' {
+  class {'cloud::dns':} ->
+  class {'cloud::default':} ->
+  class {'hdp::default':} ->
+  class {'hdp::server':}
+}
+
+node 'node1.natucci.de' {
+  class {'cloud::default':} ->
+  class {'hdp::default':} ->
+  class {'hdp::agent':}
+}
+
+node 'node2.natucci.de' {
+  class {'cloud::default':} ->
+  class {'hdp::default':} ->
+  class {'hdp::agent':}
+}
+
+node 'node3.natucci.de' {
+  class {'cloud::default':} ->
+  class {'hdp::default':} ->
+  class {'hdp::agent':}
+}
+
+node 'osmaster.natucci.de' {
+  class { selinux:
+    mode => 'permissive',
+    type => 'targeted',
+  } ->
+  class {'cloud::default':} ->
+  class {'hdp::default':} ->
+  class {'openshift::default':}
+}
+
+node 'osnode1.natucci.de' {
+  class { selinux:
+    mode => 'permissive',
+    type => 'targeted',
+  } ->
+  class {'cloud::default':} ->
+  class {'hdp::default':} ->
+  class {'openshift::default':}
+}
+
+node 'ipa.natucci.de' {
+  class {'cloud::default':} ->
+}

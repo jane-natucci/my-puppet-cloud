@@ -1,0 +1,9 @@
+set number
+set smartindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set path=.,/usr/include,,**
+set wildmenu
+set nowrap
+color blue
