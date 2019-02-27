@@ -44,5 +44,5 @@ node 'osnode1.natucci.de' {
 }
 
 node 'ipa.natucci.de' {
-  class {'cloud::default':} ->
+  class {'cloud::default':}
 }
