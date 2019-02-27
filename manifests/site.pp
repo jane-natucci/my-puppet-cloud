@@ -29,7 +29,6 @@ node 'master.openshift.natucci.de' {
     type => 'targeted',
   } ->
   class {'cloud::default':} ->
-  class {'hdp::default':} ->
   class {'openshift::default':}
 }
 
@@ -39,7 +38,6 @@ node 'node1.openshift.natucci.de' {
     type => 'targeted',
   } ->
   class {'cloud::default':} ->
-  class {'hdp::default':} ->
   class {'openshift::default':}
 }
 
