@@ -28,8 +28,8 @@ node 'master.openshift.natucci.de' {
     mode => 'permissive',
     type => 'targeted',
   } ->
-  class {'cloud::default':} ->
-  class {'openshift::default':}
+  class {'cloud::default':} # ->
+  # class {'openshift::default':}
 }
 
 node 'node1.openshift.natucci.de' {
@@ -37,8 +37,8 @@ node 'node1.openshift.natucci.de' {
     mode => 'permissive',
     type => 'targeted',
   } ->
-  class {'cloud::default':} ->
-  class {'openshift::default':}
+  class {'cloud::default':}# ->
+  # class {'openshift::default':}
 }
 
 node 'ipa.natucci.de' {
