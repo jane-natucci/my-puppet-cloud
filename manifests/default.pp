@@ -20,7 +20,7 @@ class cloud::default {
 
   service {'firewalld':
     ensure  => stopped,
-    enabled => false,
+    enable => false,
     require => Package['firewalld'],
   }
 
