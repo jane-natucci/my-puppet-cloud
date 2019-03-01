@@ -25,7 +25,7 @@ node 'node3.natucci.de' {
 
 node 'master.openshift.natucci.de' {
   class { selinux:
-    mode => 'permissive',
+    mode => 'disabled',
     type => 'targeted',
   } ->
   class {'cloud::default':} ->
@@ -34,7 +34,7 @@ node 'master.openshift.natucci.de' {
 
 node 'node1.openshift.natucci.de' {
   class { selinux:
-    mode => 'permissive',
+    mode => 'disabled',
     type => 'targeted',
   } ->
   class {'cloud::default':}# ->
