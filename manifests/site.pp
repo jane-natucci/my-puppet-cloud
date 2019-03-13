@@ -30,7 +30,7 @@ node 'master.openshift.natucci.de' {
   } ->
   class {'cloud::default':} ->
   class {'openshift::default':} ->
-  class {'openshift::master':} ->
+  class {'openshift::master':}
 }
 
 node 'node1.openshift.natucci.de' {
