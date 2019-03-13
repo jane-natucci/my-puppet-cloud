@@ -20,8 +20,13 @@ class cloud::default {
 
   service {'firewalld':
     ensure  => stopped,
-    enable => false,
+    enable  => false,
     require => Package['firewalld'],
+  }
+
+  service {'sshd':
+    ensure => running,
+    enable => true,
   }
 
   service { 'puppet':
