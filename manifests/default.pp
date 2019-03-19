@@ -18,12 +18,6 @@ class cloud::default {
 
   package {$dependencies:} ->
 
-  service {'firewalld':
-    ensure  => stopped,
-    enable  => false,
-    require => Package['firewalld'],
-  }
-
   service {'sshd':
     ensure => running,
     enable => true,
