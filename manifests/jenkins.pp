@@ -11,7 +11,7 @@ class cloud::jenkins {
     ensure => present,
   } ->
   service {'jenkins':
-    ensure  => running,
-    enable  => true,
+    ensure => running,
+    enable => true,
   }
 }
