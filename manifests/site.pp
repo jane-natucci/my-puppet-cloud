@@ -45,3 +45,8 @@ node 'node1.openshift.natucci.de' {
 node 'ipa.natucci.de' {
   class {'cloud::default':}
 }
+
+node 'jenkins.natucci.de' {
+  class {'cloud::default':} ->
+  class {'cloud::jenkins':}
+}
