@@ -7,6 +7,9 @@ class cloud::jenkins {
     source      => 'https://pkg.jenkins.io/redhat-stable/jenkins.repo',
     destination => '/etc/yum.repos.d/jenkins.repo',
   } ->
+  exec {'rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key':
+    path => '/usr/bin',
+  } ->
   package {'jenkins':
     ensure => present,
   } ->
