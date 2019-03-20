@@ -38,7 +38,6 @@ class cloud::jenkins {
     ensure  => directory,
     owner   => 'jenkins',
     mode    => '0644',
-    require => Package['docker'],
   }
 
   file {'/var/lib/jenkins/.docker/config.json':
@@ -48,7 +47,6 @@ class cloud::jenkins {
     mode    => '0644',
     require => [
       File['/var/lib/jenkins/.docker/'],
-      Package['docker'],
     ]
   }
 }
