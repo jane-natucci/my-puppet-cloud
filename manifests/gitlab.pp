@@ -28,7 +28,7 @@ class cloud::gitlab {
     unless  => 'ls /etc/yum.repos.d/gitlab_gitlab-ee.repo'
   } ->
   exec {'yum install -y gitlab-ee':
-    environment => 'EXTERNAL_URL="https://gitlab.natucci.de"',
+    environment => 'EXTERNAL_URL=https://gitlab.natucci.de',
     unless      => 'rpm -qa | grep gitlab-ee',
   }
 
