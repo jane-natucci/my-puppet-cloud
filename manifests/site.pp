@@ -50,3 +50,8 @@ node 'jenkins.natucci.de' {
   class {'cloud::default':} ->
   class {'cloud::jenkins':}
 }
+
+node 'gitlab.natucci.de' {
+  class {'cloud::default':} ->
+  class {'cloud::gitlab':}
+}
