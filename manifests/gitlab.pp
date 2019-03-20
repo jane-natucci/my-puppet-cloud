@@ -41,4 +41,9 @@ class cloud::gitlab {
     unless  => 'firewall-cmd --query-service="http"',
     require => Service['firewalld'],
   }
+
+  exec {'firewall-cmd --add-service="https"':
+    unless  => 'firewall-cmd --query-service="https"',
+    require => Service['firewalld'],
+  }
 }
