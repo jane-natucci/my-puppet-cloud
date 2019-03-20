@@ -28,7 +28,7 @@ class cloud::gitlab {
   } ->
   exec {'yum install -y gitlab-ee':
     environment => 'EXTERNAL_URL="https://gitlab.natucci.de"',
-    unless      => 'rpm -qa gitlab-ee',
+    unless      => 'rpm -qa | grep gitlab-ee',
   }
 
   service {'firewalld':
