@@ -49,9 +49,13 @@ node 'ipa.natucci.de' {
 node 'jenkins.natucci.de' {
   class {'cloud::default':} ->
   class {'cloud::jenkins':}
+
+  class {'cloud::docker_config'}
 }
 
 node 'gitlab.natucci.de' {
   class {'cloud::default':} ->
   class {'cloud::gitlab':}
+
+  class {'cloud::docker_config'}
 }

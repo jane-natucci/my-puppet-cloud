@@ -1,0 +1,7 @@
+{
+  "auths": {
+    "nexus.natucci.de:8483": {
+      "auth": "REDACTED_BASE64_AUTH"
+    }
+  }
+}
