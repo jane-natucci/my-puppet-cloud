@@ -49,4 +49,6 @@ class cloud::jenkins {
       File['/var/lib/jenkins/.docker/'],
     ]
   }
+
+  package {'rubygem-puppet-lint':}
 }
