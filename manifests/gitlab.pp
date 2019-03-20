@@ -27,7 +27,7 @@ class cloud::gitlab {
     require => File['/root/script.rpm.sh'],
   } ->
   exec {'yum install -y gitlab-ee':
-    environemnt => 'EXTERNAL_URL="https://gitlab.natucci.de"',
+    environment => 'EXTERNAL_URL="https://gitlab.natucci.de"',
     unless      => 'rpm -qa gitlab-ee',
   }
 
