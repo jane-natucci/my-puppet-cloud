@@ -22,9 +22,9 @@ pipeline {
             steps {
                 echo 'Deploying..'
 
-                sh 'scp $(ls -t pkg/puppet-hdp-*.tar.gz | head -n 1) root@puppet:/tmp/'
+                sh 'scp $(ls -t pkg/puppet-cloud-*.tar.gz | head -n 1) root@puppet:/tmp/'
 
-                sh 'ssh root@puppet \'puppet module install -f $(ls -t /tmp/puppet-hdp-*.tar.gz | head -n 1)\''
+                sh 'ssh root@puppet \'puppet module install -f $(ls -t /tmp/puppet-cloud-*.tar.gz | head -n 1)\''
             }
         }
     }
