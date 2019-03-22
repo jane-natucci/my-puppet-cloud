@@ -52,6 +52,8 @@ class cloud::jenkins {
 
   package {'rubygem-puppet-lint':}
 
+  package { 'maven':}
+
   file {'/var/lib/jenkins/.m2':
     ensure  => directory,
     owner   => 'jenkins',
