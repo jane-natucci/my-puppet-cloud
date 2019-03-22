@@ -51,4 +51,20 @@ class cloud::jenkins {
   }
 
   package {'rubygem-puppet-lint':}
+
+  file {'/var/lib/jenkins/.m2':
+    ensure  => directory,
+    owner   => 'jenkins',
+    mode    => '0644',
+  }
+
+  file {'/var/lib/jenkins/.m2/settings.xml':
+    ensure  => present,
+    source  => 'puppet:///modules/cloud/settings.xml',
+    owner   => 'jenkins',
+    mode    => '0644',
+    require => [
+      File['/var/lib/jenkins/.m2/'],
+    ]
+  }
 }
