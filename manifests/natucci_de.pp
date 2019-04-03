@@ -32,6 +32,9 @@ class cloud::jenkins {
         enable => true,
     } ->
     exec {'systemctl restart rsyslog':
-        onlyif 
+        unless => 'ss -nltp | grep 514'
+    } ->
+    exec {'systemctl restart rh-haproxy18-haproxy':
+        unless => "grep 'backend app' /etc/opt/rh/rh-haproxy18/haproxy/haproxy.cfg"
     }
 }
