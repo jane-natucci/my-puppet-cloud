@@ -9,8 +9,8 @@ class cloud::natucci_de {
     package {'rh-haproxy18':
         ensure => present,
     } ->
-    exec {'scl enable rh-haproxy18 bash':
-        unless => 'scl -l | grep rh-haproxy18',
+    exec {'/usr/bin/scl enable rh-haproxy18 bash':
+        unless => '/usr/bin/scl -l | grep rh-haproxy18',
     } ->
     service {'rh-haproxy18-haproxy':
         ensure => running,
