@@ -9,4 +9,9 @@ class cloud::dns {
     mode   => "0400",
     ensure => present
   }
+  
+  service {'nexus':
+    ensure => running,
+    enable => true,
+  }
 }
