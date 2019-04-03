@@ -1,4 +1,4 @@
-class cloud::jenkins {
+class cloud::natucci_de {
     Exec {path => '/usr/bin'}
 
     Package {ensure => present}
