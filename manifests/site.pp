@@ -42,5 +42,5 @@ node 'gitlab.natucci.de' {
 node 'natucci.de' {
   class {'cloud::default':} ->
   class {'cloud::docker_config':} ->
-  class {'cloud::natucci_de':} ->
+  class {'cloud::natucci_de':}
 }
