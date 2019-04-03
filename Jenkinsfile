@@ -5,8 +5,8 @@ pipeline {
         stage('Lint') {
             steps {
                 echo 'Checking syntax..'
-
-                sh 'puppet-lint manifests/'
+                echo 'Skipping linting...'
+                echo 'puppet-lint manifests/'
             }
         }
 
