@@ -1,5 +1,5 @@
 class cloud::natucci_de {
-    Exec {path => '/usr/bin'}
+    Exec {path => '/usr/bin;/usr/sbin'}
 
     Package {ensure => present}
 
