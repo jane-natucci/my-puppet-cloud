@@ -13,6 +13,7 @@ class cloud::jenkins {
   } ->
   package {'jenkins':
     ensure => present,
+    require => Package['java-1.8.0-openjdk.x86_64']
   } ->
   service {'jenkins':
     ensure => running,
