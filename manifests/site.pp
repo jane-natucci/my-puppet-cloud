@@ -8,7 +8,8 @@ node 'dns.natucci.de' {
 node 'node1.natucci.de' {
   class {'cloud::default':} ->
   class {'hdp::default':} ->
-  class {'hdp::agent':}
+  class {'hdp::agent':} ->
+  class {'cloud::firewall::node1':}
 }
 
 node 'node2.natucci.de' {
