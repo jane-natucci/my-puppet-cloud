@@ -13,14 +13,14 @@ class cloud::firewall::node1 () inherits ::cloud::params {
   }
 
   # spark history server
-  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=18080 accept\"":
-    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=18080 accept\"",
+  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=18080 protocol=tcp accept\"":
+    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=18080 protocol=tcp accept\"",
     require => Service['firewalld'],
   }
 
   # yarn node manager
-  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=8042 accept\"":
-    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=8042 accept\"",
+  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=8042 protocol=tcp accept\"":
+    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=8042 protocol=tcp accept\"",
     require => Service['firewalld'],
   }
 
