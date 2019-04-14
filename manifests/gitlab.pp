@@ -37,13 +37,13 @@ class cloud::gitlab {
     enable => true,
   }
 
-  exec {'firewall-cmd --add-service="http"':
-    unless  => 'firewall-cmd --query-service="http"',
+  exec {'firewall-cmd --add-rich-rule="rule family=ipv4 source address=37.252.248.93 service name=http accept"':
+    unless => 'firewall-cmd --query-rich-rule="rule family=ipv4 source address=37.252.248.93 service name=http accept"',
     require => Service['firewalld'],
   }
 
-  exec {'firewall-cmd --add-service="https"':
-    unless  => 'firewall-cmd --query-service="https"',
+  exec {'firewall-cmd --add-rich-rule="rule family=ipv4 source address=37.252.248.93 service name=https accept"':
+    unless => 'firewall-cmd --query-rich-rule="rule family=ipv4 source address=37.252.248.93 service name=https accept"',
     require => Service['firewalld'],
   }
 }
