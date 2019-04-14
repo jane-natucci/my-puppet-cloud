@@ -1,4 +1,6 @@
 class cloud::firewall::node1 () inherits ::cloud::params {
+  Exec {path => '/usr/bin'}
+
   service {'firewalld':
     ensure => running,
     enable => true,
