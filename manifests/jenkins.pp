@@ -53,7 +53,7 @@ class cloud::jenkins {
 
   package {'rubygem-puppet-lint':}
 
-  package { 'maven':}
+  package {'maven':}
 
   file {'/var/lib/jenkins/.m2':
     ensure  => directory,
@@ -70,4 +70,6 @@ class cloud::jenkins {
       File['/var/lib/jenkins/.m2/'],
     ]
   }
+
+  package {'protobuf-compiler':}
 }
