@@ -11,7 +11,7 @@ class cloud::firewall::node1 () {
   }
 
   # spark history server
-  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=${ip_vpn} port port=18080 accept\"":
+  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=${cloud::ip_vpn} port port=18080 accept\"":
     unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=${cloud::ip_vpn} port port=18080 accept\"",
     require => Service['firewalld'],
   }
