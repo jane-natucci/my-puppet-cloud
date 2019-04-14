@@ -1,4 +1,4 @@
-class cloud::firewall::node1 () {
+class cloud::firewall::node1 () inherits ::cloud::init {
   service {'firewalld':
     ensure => running,
     enable => true,
