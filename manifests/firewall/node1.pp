@@ -24,6 +24,12 @@ class cloud::firewall::node1 () inherits ::cloud::params {
     require => Service['firewalld'],
   }
 
+  # NameNode UI
+  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=50070 protocol=tcp accept\"":
+    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=50070 protocol=tcp accept\"",
+    require => Service['firewalld'],
+  }
+
   # everything from node2
   exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_node2 accept\"":
     unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_node2 accept\"",
