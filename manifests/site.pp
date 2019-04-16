@@ -2,7 +2,8 @@ node 'dns.natucci.de' {
   class {'cloud::dns':} ->
   class {'cloud::default':} ->
   class {'hdp::default':} ->
-  class {'hdp::server':}
+  class {'hdp::server':} ->
+  class {'cloud::firewall::dns':}
 }
 
 node 'node1.natucci.de' {

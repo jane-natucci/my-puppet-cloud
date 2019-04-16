@@ -5,4 +5,7 @@ class cloud::params {
   $ip_node3 = '136.243.43.100'
   $ip_ipa = '159.69.88.207'
   $ip_vpn = '37.252.248.93'
+  $ip_gitlab = '116.203.70.215'
+  $ip_jenkins = '116.203.117.236'
+  $ip_natucci_de = '116.203.156.161'
 }
