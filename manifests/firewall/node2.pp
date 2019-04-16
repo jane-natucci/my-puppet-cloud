@@ -89,7 +89,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
     action   => 'accept',
   }
 
-  firewalld_rich_rule {'Spark HistoryServer':
+  firewalld_rich_rule {'YARN AppTimelineServer':
     ensure   => present,
     source   => '$::cloud::params::ip_vpn',
     port     => {
