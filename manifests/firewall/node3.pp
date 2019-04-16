@@ -11,7 +11,7 @@ class cloud::firewall::node3 () inherits ::cloud::params {
 
   firewalld_rich_rule {'NodeManager 45454':
     ensure   => present,
-    source   => '$::cloud::params::ip_vpn',
+    source   => "$::cloud::params::ip_vpn",
     port     => {
       port => '45454',
       protocol => 'tcp',
@@ -21,7 +21,7 @@ class cloud::firewall::node3 () inherits ::cloud::params {
 
   firewalld_rich_rule {'NodeManager 8042':
     ensure   => present,
-    source   => '$::cloud::params::ip_vpn',
+    source   => "$::cloud::params::ip_vpn",
     port     => {
       port => '8042',
       protocol => 'tcp',
