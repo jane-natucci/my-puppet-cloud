@@ -7,6 +7,7 @@ class cloud::firewall::node3 () inherits ::cloud::params {
   firewalld_service {'SSH':
     ensure  => present,
     service => 'ssh',
+    require => Service['firewalld'],
   }
 
   firewalld_rich_rule {'NodeManager 45454':
@@ -17,6 +18,7 @@ class cloud::firewall::node3 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'NodeManager 8042':
@@ -27,29 +29,34 @@ class cloud::firewall::node3 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'accept everything from node1':
     ensure  => present,
     source  => "${::cloud::params::ip_node1}",
     action  => 'accept',
+    require => Service['firewalld'],
   }
 
   firewalld_rich_rule {'accept everything from node2':
     ensure  => present,
     source  => "${::cloud::params::ip_node2}",
     action  => 'accept',
+    require => Service['firewalld'],
   }
 
   firewalld_rich_rule {'accept everything from dns':
     ensure  => present,
     source  => "${::cloud::params::ip_dns}",
     action  => 'accept',
+    require => Service['firewalld'],
   }
 
   firewalld_rich_rule {'accept everything from ipa':
     ensure  => present,
     source  => "${::cloud::params::ip_ipa}",
     action  => 'accept',
+    require => Service['firewalld'],
   }
 }

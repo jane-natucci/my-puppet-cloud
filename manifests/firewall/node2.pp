@@ -7,6 +7,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
   firewalld_service {'SSH':
     ensure  => present,
     service => 'ssh',
+    require => Service['firewalld'],
   }
 
   firewalld_rich_rule {'ResourceManager':
@@ -17,6 +18,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'ResourceManager Admin':
@@ -27,6 +29,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'ResourceManager ResourceTracker':
@@ -37,6 +40,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'ResourceManager Scheduler':
@@ -47,6 +51,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'ResourceManager WebApp':
@@ -57,6 +62,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'NodeManager 45454':
@@ -67,6 +73,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'NodeManager 8042':
@@ -77,6 +84,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'Spark HistoryServer':
@@ -87,6 +95,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'YARN AppTimelineServer':
@@ -97,6 +106,7 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'NameNode UI':
@@ -107,29 +117,34 @@ class cloud::firewall::node2 () inherits ::cloud::params {
       protocol => 'tcp',
     },
     action   => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'accept everything from node1':
     ensure  => present,
     source  => "${::cloud::params::ip_node1}",
     action  => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'accept everything from node3':
     ensure  => present,
     source  => "${::cloud::params::ip_node3}",
     action  => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'accept everything from dns':
     ensure  => present,
     source  => "${::cloud::params::ip_dns}",
     action  => 'accept',
+    require  => Service['firewalld'],
   }
 
   firewalld_rich_rule {'accept everything from ipa':
     ensure  => present,
     source  => "${::cloud::params::ip_ipa}",
     action  => 'accept',
+    require  => Service['firewalld'],
   }
 }
