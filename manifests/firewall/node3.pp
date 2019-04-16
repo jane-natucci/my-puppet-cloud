@@ -6,45 +6,52 @@ class cloud::firewall::node3 () inherits ::cloud::params {
     enable => true,
   }
 
-  # ssh
-  exec {"firewall-cmd --add-service=ssh":
-    unless  => 'firewall-cmd --query-service=ssh',
-    require => Service['firewalld'],
+  firewalld_service {'SSH':
+    ensure  => present,
+    service => 'ssh',
   }
 
-  # spark history server
-  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=18080 protocol=tcp accept\"":
-    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=18080 protocol=tcp accept\"",
-    require => Service['firewalld'],
+  firewalld_rich_rule {'NodeManager 45454':
+    ensure   => present,
+    source   => '$::cloud::params::ip_vpn',
+    port     => {
+      port => '45454',
+      protocol => 'tcp',
+    },
+    action   => 'accept',
   }
 
-  # yarn node manager
-  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=8042 protocol=tcp accept\"":
-    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_vpn port port=8042 protocol=tcp accept\"",
-    require => Service['firewalld'],
+  firewalld_rich_rule {'NodeManager 8042':
+    ensure   => present,
+    source   => '$::cloud::params::ip_vpn',
+    port     => {
+      port => '8042',
+      protocol => 'tcp',
+    },
+    action   => 'accept',
   }
 
-  # everything from node1
-  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_node1 accept\"":
-    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_node1 accept\"",
-    require => Service['firewalld'],
+  firewalld_rich_rule {'accept everything from node1':
+    ensure  => present,
+    source  => "${::cloud::params::ip_node1}",
+    action  => 'accept',
   }
 
-  # everything from node2
-  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_node2 accept\"":
-    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_node2 accept\"",
-    require => Service['firewalld'],
+  firewalld_rich_rule {'accept everything from node2':
+    ensure  => present,
+    source  => "${::cloud::params::ip_node2}",
+    action  => 'accept',
   }
 
-  # everything from dns
-  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_dns accept\"":
-    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_dns accept\"",
-    require => Service['firewalld'],
+  firewalld_rich_rule {'accept everything from dns':
+    ensure  => present,
+    source  => "${::cloud::params::ip_dns}",
+    action  => 'accept',
   }
 
-  # everything from ipa
-  exec {"firewall-cmd --add-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_ipa accept\"":
-    unless  => "firewall-cmd --query-rich-rule=\"rule family=ipv4 source address=$::cloud::params::ip_ipa accept\"",
-    require => Service['firewalld'],
+  firewalld_rich_rule {'accept everything from ipa':
+    ensure  => present,
+    source  => "${::cloud::params::ip_ipa}",
+    action  => 'accept',
   }
 }
