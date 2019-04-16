@@ -7,6 +7,7 @@ class cloud::firewall::dns () inherits ::cloud::params {
   firewalld_service {'SSH':
     ensure  => present,
     service => 'ssh',
+    require => Service['firewalld'],
   }
 
   firewalld_rich_rule {'accept everything from node1':
@@ -53,7 +54,7 @@ class cloud::firewall::dns () inherits ::cloud::params {
 
   firewalld_rich_rule {'accept everything from natucci.de':
     ensure  => present,
-    source  => "${::cloud::params::ip_natucci}",
+    source  => "${::cloud::params::ip_natucci_de}",
     action  => 'accept',
     require => Service['firewalld'],
   }
