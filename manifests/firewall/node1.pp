@@ -32,6 +32,17 @@ class cloud::firewall::node1 () inherits ::cloud::params {
     require  => Service['firewalld'],
   }
 
+  firewalld_rich_rule {'Zeppelin Notebook 9995':
+    ensure   => present,
+    source   => "$::cloud::params::ip_vpn",
+    port     => {
+      port => '9995',
+      protocol => 'tcp',
+    },
+    action   => 'accept',
+    require  => Service['firewalld'],
+  }
+
   firewalld_rich_rule {'accept everything from node2':
     ensure  => present,
     source  => "${::cloud::params::ip_node2}",
