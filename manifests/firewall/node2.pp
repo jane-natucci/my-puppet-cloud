@@ -120,6 +120,17 @@ class cloud::firewall::node2 () inherits ::cloud::params {
     require  => Service['firewalld'],
   }
 
+  firewalld_rich_rule {'19888':
+    ensure   => present,
+    source   => "$::cloud::params::ip_vpn",
+    port     => {
+      port => '19888',
+      protocol => 'tcp',
+    },
+    action   => 'accept',
+    require  => Service['firewalld'],
+  }
+
   firewalld_rich_rule {'accept everything from node1':
     ensure  => present,
     source  => "${::cloud::params::ip_node1}",
