@@ -14,6 +14,7 @@ class cloud::default {
     'telnet',
     'traceroute',
     'firewalld',
+    'screen'
     ]
 
   package {$dependencies:} ->
