@@ -25,4 +25,12 @@ class cloud::firewall::gitlab () inherits ::cloud::params {
     service => 'https',
     require => Service['firewalld'],
   }
+
+  firewalld_rich_rule {'accept https from VPN in London':
+    ensure  => present,
+    source  => "51.77.126.243",
+    action  => 'accept',
+    service => 'https',
+    require => Service['firewalld'],
+  }
 }
