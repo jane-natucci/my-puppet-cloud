@@ -40,7 +40,8 @@ node 'jenkins.natucci.de' {
 node 'gitlab.natucci.de' {
   class {'::cloud::default':} ->
   class {'::cloud::gitlab':} ->
-  class {'::cloud::docker_config':}
+  class {'::cloud::docker_config':} ->
+  class {'::cloud::firewall::gitlab':}
 }
 
 node 'natucci.de' {
