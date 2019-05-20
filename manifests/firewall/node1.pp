@@ -21,6 +21,17 @@ class cloud::firewall::node1 () inherits ::cloud::params {
     require  => Service['firewalld'],
   }
 
+  firewalld_rich_rule {'Spark History Server 18080':
+    ensure   => present,
+    source   => "$::cloud::params::ip_vpn",
+    port     => {
+      port => '18080',
+      protocol => 'tcp',
+    },
+    action   => 'accept',
+    require  => Service['firewalld'],
+  }
+
   firewalld_rich_rule {'NodeManager 8042':
     ensure   => present,
     source   => "$::cloud::params::ip_vpn",
