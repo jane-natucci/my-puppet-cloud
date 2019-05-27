@@ -52,5 +52,5 @@ node 'natucci.de' {
 
 node 'ipa.natucci.de' {
   class {'::cloud::default':} ->
-  class {'::cloud::ipa':} ->
+  class {'::cloud::ipa':}
 }
