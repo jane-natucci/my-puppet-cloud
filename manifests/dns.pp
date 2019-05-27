@@ -17,10 +17,5 @@ class cloud::dns {
 
   package {'freeipa-server':
     ensure => present,
-  } ->
-  firewalld_service {'freeipa':
-    ensure  => present,
-    service => 'freeipa-ldap',
-    require => Service['firewalld'],
   }
 }

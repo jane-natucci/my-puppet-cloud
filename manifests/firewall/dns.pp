@@ -65,4 +65,10 @@ class cloud::firewall::dns () inherits ::cloud::params {
     action  => 'accept',
     require => Service['firewalld'],
   }
+
+  firewalld_service {'freeipa':
+    ensure  => present,
+    service => 'freeipa-ldap',
+    require => Service['firewalld'],
+  }
 }
