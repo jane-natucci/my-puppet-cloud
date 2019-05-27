@@ -61,7 +61,7 @@ class cloud::firewall::dns () inherits ::cloud::params {
 
   firewalld_rich_rule {'accept everything from ipa.natucci.de':
     ensure  => present,
-    source  => "${::cloud::params::ip_ipa_natucci_de}",
+    source  => "${::cloud::params::ip_ipa}",
     action  => 'accept',
     require => Service['firewalld'],
   }
