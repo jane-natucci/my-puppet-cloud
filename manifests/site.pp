@@ -29,7 +29,7 @@ node 'node3.natucci.de' {
 
 node 'ipa.natucci.de' {
   class {'::cloud::default':} ->
-  class {'::cloud::ipa':}
+  class {'::cloud::firewall::ipa':}
 }
 
 node 'jenkins.natucci.de' {
