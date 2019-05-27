@@ -49,3 +49,8 @@ node 'natucci.de' {
   class {'::cloud::docker_config':} ->
   class {'::cloud::natucci_de':}
 }
+
+node 'ipa.natucci.de' {
+  class {'::cloud::default':} ->
+  class {'::cloud::ipa':} ->
+}
