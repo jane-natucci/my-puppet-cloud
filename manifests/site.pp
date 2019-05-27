@@ -28,7 +28,8 @@ node 'node3.natucci.de' {
 }
 
 node 'ipa.natucci.de' {
-  class {'::cloud::default':}
+  class {'::cloud::default':} ->
+  class {'::cloud::ipa':}
 }
 
 node 'jenkins.natucci.de' {
@@ -48,9 +49,4 @@ node 'natucci.de' {
   class {'::cloud::default':} ->
   class {'::cloud::docker_config':} ->
   class {'::cloud::natucci_de':}
-}
-
-node 'ipa.natucci.de' {
-  class {'::cloud::default':} ->
-  class {'::cloud::ipa':}
 }
