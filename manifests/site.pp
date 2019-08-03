@@ -50,3 +50,8 @@ node 'natucci.de' {
   class {'::cloud::docker_config':} ->
   class {'::cloud::natucci_de':}
 }
+
+node 'workstation.natucci.de' {
+  class {'::cloud::default':} ->
+  class {'::cloud::docker_config':}
+}
