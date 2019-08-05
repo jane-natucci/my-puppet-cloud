@@ -1,0 +1,7 @@
+[user]
+  email = ievgen.prokhorenko@natucci.de
+  name = Ievgen Prokhorenko
+[color]
+	ui = auto
+[include]
+  path = gitalias.txt
