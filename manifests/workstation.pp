@@ -12,6 +12,5 @@ class cloud::workstation {
     source => 'puppet:///modules/cloud/.gitconfig',
     owner  => 0,
     ensure => present,
-    require => File['/root/.gitconfig']
   }
 }
