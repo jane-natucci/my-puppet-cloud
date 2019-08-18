@@ -6,4 +6,4 @@ set expandtab
 set path=.,/usr/include,,**
 set wildmenu
 set nowrap
-color default
+color blue
