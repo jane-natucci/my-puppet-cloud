@@ -1,8 +1,6 @@
 node 'dns.natucci.de' {
   class {'::cloud::dns':} ->
   class {'::cloud::default':} ->
-  class {'::hdp::default':} ->
-  class {'::hdp::server':} ->
   class {'::cloud::firewall::dns':}
 }
 
@@ -45,11 +43,13 @@ node 'gitlab.natucci.de' {
   class {'::cloud::firewall::gitlab':}
 }
 
+/*
 node 'natucci.de' {
   class {'::cloud::default':} ->
   class {'::cloud::docker_config':} ->
   class {'::cloud::natucci_de':}
 }
+*/
 
 node 'workstation.natucci.de' {
   class {'::cloud::default':} ->
