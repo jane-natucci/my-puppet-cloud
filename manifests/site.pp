@@ -1,7 +1,8 @@
 node 'dns.natucci.de' {
   class {'::cloud::dns':} ->
   class {'::cloud::default':} ->
-  class {'::cloud::firewall::dns':}
+  class {'::cloud::firewall::dns':} ->
+  class {'::cloud::natucci_de':}
 }
 
 node 'node1.natucci.de' {
