@@ -20,10 +20,19 @@ class cloud::jenkins {
     enable => true,
   }
 
+  file {'/var/lib/jenkins':
+    ensure  => directory,
+    owner   => 'jenkins',
+    mode    => '0644',
+  }
+
   file {'/var/lib/jenkins/.docker':
     ensure  => directory,
     owner   => 'jenkins',
     mode    => '0644',
+    require => [
+      File['/var/lib/jenkins'],
+    ]
   }
 
   file {'/var/lib/jenkins/.docker/config.json':
@@ -44,6 +53,9 @@ class cloud::jenkins {
     ensure  => directory,
     owner   => 'jenkins',
     mode    => '0644',
+    require => [
+      File['/var/lib/jenkins/.docker/'],
+    ]
   }
 
   file {'/var/lib/jenkins/.m2/settings.xml':
