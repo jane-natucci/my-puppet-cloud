@@ -25,21 +25,6 @@ class cloud::jenkins {
     enable => true
   }
 
-  exec {'firewall-cmd --add-rich-rule=\'rule family="ipv4" source address="37.252.248.93" accept\'':
-    unless => 'firewall-cmd --query-rich-rule=\'rule family="ipv4" source address="37.252.248.93" accept\'',
-    require => Service['firewalld'],
-  }
-
-  exec {'firewall-cmd --add-rich-rule=\'rule family="ipv4" source address="51.77.126.243" accept\'':
-    unless => 'firewall-cmd --query-rich-rule=\'rule family="ipv4" source address="51.77.126.243" accept\'',
-    require => Service['firewalld'],
-  }
-
-  exec {'firewall-cmd --add-rich-rule=\'rule family="ipv4" source address="116.203.70.215" accept\'':
-    unless => 'firewall-cmd --query-rich-rule=\'rule family="ipv4" source address="116.203.70.215" accept\'',
-    require => Service['firewalld'],
-  }
-
   file {'/var/lib/jenkins/.docker':
     ensure  => directory,
     owner   => 'jenkins',
