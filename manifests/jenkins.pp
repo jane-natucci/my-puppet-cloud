@@ -20,11 +20,6 @@ class cloud::jenkins {
     enable => true,
   }
 
-  service {'firewalld':
-    ensure => running,
-    enable => true
-  }
-
   file {'/var/lib/jenkins/.docker':
     ensure  => directory,
     owner   => 'jenkins',
