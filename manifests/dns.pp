@@ -11,7 +11,7 @@ class cloud::dns {
   }
   
   service {'nexus':
-    ensure => running,
+    ensure => stopped,
     enable => true,
   }
 
