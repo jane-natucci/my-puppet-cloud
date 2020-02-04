@@ -7,4 +7,4 @@ set path=.,/usr/include,,**
 set wildmenu
 set nowrap
 set laststatus=2
-color default
+color blue
