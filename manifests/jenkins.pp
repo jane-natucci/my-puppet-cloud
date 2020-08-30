@@ -68,6 +68,4 @@ class cloud::jenkins {
       File['/var/lib/jenkins/.m2/'],
     ]
   }
-
-  package {'protobuf-compiler':}
 }
