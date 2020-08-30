@@ -11,7 +11,7 @@ class cloud::docker_config {
     ensure  => directory,
     owner   => 0,
     mode    => '0644',
-    require => Package['docker'],
+    require => Package['docker-ce'],
   }
 
   file {'/root/.docker/config.json':
@@ -21,7 +21,7 @@ class cloud::docker_config {
     mode    => '0644',
     require => [
       File['/root/.docker/'],
-      Package['docker'],
+      Package['docker-ce'],
     ]
   }
 
@@ -30,7 +30,7 @@ class cloud::docker_config {
     source  => 'puppet:///modules/cloud/daemon.json',
     owner   => 0,
     mode    => '0644',
-    require => Package['docker'],
+    require => Package['docker-ce'],
   }
 
   service {'docker':
@@ -39,7 +39,7 @@ class cloud::docker_config {
     require => [
       File['/etc/docker/daemon.json'],
       File['/root/.docker/config.json'],
-      Package['docker']
+      Package['docker-ce']
     ]
   }
 }
