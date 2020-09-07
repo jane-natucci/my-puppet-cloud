@@ -14,20 +14,22 @@ pipeline {
             }
         }
         
-        stage('Install') {
+        stage('Install puppet-cloud.tar.gz') {
             steps {
                 sh 'sudo /opt/puppetlabs/bin/puppet module install -f $(ls -t pkg/puppet-cloud-*.tar.gz | head -n 1)'
             }
         }
 
-        stage('Deploy') {            
+        stage('Backup site.pp') {    
             when {
                 expression { return fileExists('/etc/puppetlabs/code/environments/production/manifests/site.pp') }
             }
             steps {
                 sh 'cp /etc/puppetlabs/code/environments/production/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp.old'
             }
-            
+        }
+        
+        stage('Deploy site.pp') {
             steps {
                 sh 'cp /etc/puppetlabs/code/environments/production/modules/cloud/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp'
             }
