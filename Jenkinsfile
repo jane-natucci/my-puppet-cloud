@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo 'Building..'
 
-                sh 'echo /opt/puppetlabs/bin/puppet module build .'
+                sh '/opt/puppetlabs/bin/puppet module build .'
             }
         }
 
@@ -21,13 +21,10 @@ pipeline {
             steps {
                 echo 'Deploying..'
 
-                sh 'echo ssh root@puppet \'cp /etc/puppetlabs/code/environments/production/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp.old\''
+                sh '/opt/puppetlabs/bin/puppet module install -f $(ls -t pkg/puppet-cloud-*.tar.gz | head -n 1)'
 
-                sh 'echo scp $(ls -t pkg/puppet-cloud-*.tar.gz | head -n 1) root@puppet:/tmp/'
-
-                sh 'echo ssh root@puppet \'puppet module install -f $(ls -t /tmp/puppet-cloud-*.tar.gz | head -n 1)\''
-
-                sh 'echo ssh root@puppet \'cp /etc/puppetlabs/code/environments/production/modules/cloud/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp\''
+                sh 'cp /etc/puppetlabs/code/environments/production/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp.old'
+                sh 'cp /etc/puppetlabs/code/environments/production/modules/cloud/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp\'
             }
         }
     }
