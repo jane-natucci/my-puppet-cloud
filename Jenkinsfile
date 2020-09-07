@@ -34,5 +34,11 @@ pipeline {
                 sh 'sudo cp /etc/puppetlabs/code/environments/production/modules/cloud/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp'
             }
         }
+
+        stage('puppet agent -t') {
+            steps {
+                sh 'sudo /opt/puppetlabs/bin/puppet agent -t'
+            }
+        }
     }
 }
