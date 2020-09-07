@@ -21,7 +21,7 @@ pipeline {
             steps {
                 echo 'Installing..'
 
-                sh '/opt/puppetlabs/bin/puppet module install -f $(ls -t pkg/puppet-cloud-*.tar.gz | head -n 1)'
+                sh 'sudo /opt/puppetlabs/bin/puppet module install -f $(ls -t pkg/puppet-cloud-*.tar.gz | head -n 1)'
             }
         }
 
