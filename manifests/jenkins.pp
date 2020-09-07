@@ -45,8 +45,7 @@ class cloud::jenkins {
     ]
   }
 
-  package {'rubygems':} ->
-  exec {'gem install puppet-lint':}
+  package {'rubygem-puppet-lint':}
 
   package {'maven':}
 
