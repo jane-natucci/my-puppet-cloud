@@ -1,4 +1,4 @@
-class cloud::firewall::node1 () inherits ::cloud::params {
+class cloud::firewall::puppet () inherits ::cloud::params {
   service {'firewalld':
     ensure => running,
     enable => true,
