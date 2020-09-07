@@ -1,4 +1,4 @@
-class cloud::natucci_de {
+class cloud::www {
     Exec {path => '/usr/bin:/usr/sbin'}
 
     Package {ensure => present}
