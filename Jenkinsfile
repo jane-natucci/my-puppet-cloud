@@ -23,9 +23,9 @@ pipeline {
         stage('Deploy') {            
             when {
                 expression { return fileExists('/etc/puppetlabs/code/environments/production/manifests/site.pp') }
-                steps {
-                    sh 'cp /etc/puppetlabs/code/environments/production/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp.old'
-                }
+            }
+            steps {
+                sh 'cp /etc/puppetlabs/code/environments/production/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp.old'
             }
             
             steps {
