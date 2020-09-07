@@ -31,7 +31,7 @@ pipeline {
         
         stage('Deploy site.pp') {
             steps {
-                sh 'cp /etc/puppetlabs/code/environments/production/modules/cloud/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp'
+                sh 'sudo cp /etc/puppetlabs/code/environments/production/modules/cloud/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp'
             }
         }
     }
