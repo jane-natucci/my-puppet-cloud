@@ -4,6 +4,8 @@ node 'www.natucci.de' {
   class {'::cloud::natucci_de':}
 }
 
-node 'puppet.natucci.de' {
-  class {'::cloud::default':}
+node 'jenkins.natucci.de' {
+  class {'::cloud::default':} ->
+  class {'::cloud::jenkins':}
+  /* -> class {'::cloud::docker_config':} */
 }

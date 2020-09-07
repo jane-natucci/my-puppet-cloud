@@ -2,10 +2,7 @@ class cloud::docker_config {
   Package {ensure => present}
   Exec {path => '/usr/bin:/usr/sbin'}
 
-  exec {'yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo':} ->
-  package {'docker-ce':} ->
-  package {'docker-ce-cli':} ->
-  package {'containerd.io':}
+  package {'docker':}
 
   file {'/root/.docker':
     ensure  => directory,
