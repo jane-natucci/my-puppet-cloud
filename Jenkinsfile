@@ -28,8 +28,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying..'
-
-                sh 'cp -f /etc/puppetlabs/code/environments/production/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp.old'
+                if (fileExists('/etc/puppetlabs/code/environments/production/manifests/site.pp')) {
+                    sh 'cp /etc/puppetlabs/code/environments/production/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp.old'
+                }
                 sh 'cp /etc/puppetlabs/code/environments/production/modules/cloud/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp'
             }
         }
