@@ -4,5 +4,6 @@ node 'www.natucci.de' {
 }
 
 node 'puppet.natucci.de' {
-  class {'::cloud::default':}
+  class {'::cloud::default':} ->
+  class {'::cloud::firewall::puppet':}
 }
