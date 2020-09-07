@@ -37,7 +37,7 @@ pipeline {
 
         stage('puppet agent -t') {
             steps {
-                sh 'sudo /opt/puppetlabs/bin/puppet agent -t'
+                sh 'sudo /opt/puppetlabs/bin/puppet agent -t || true'
             }
         }
     }
