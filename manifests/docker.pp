@@ -1,4 +1,4 @@
-class cloud::docker_config {
+class cloud::docker {
   Package {ensure => present}
   Exec {path => '/usr/bin:/usr/sbin'}
 
