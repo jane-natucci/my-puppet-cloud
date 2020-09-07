@@ -25,7 +25,7 @@ pipeline {
                 expression { return fileExists('/etc/puppetlabs/code/environments/production/manifests/site.pp') }
             }
             steps {
-                sh 'cp /etc/puppetlabs/code/environments/production/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp.old'
+                sh 'sudo cp /etc/puppetlabs/code/environments/production/manifests/site.pp /etc/puppetlabs/code/environments/production/manifests/site.pp.old'
             }
         }
         
