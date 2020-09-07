@@ -14,7 +14,8 @@ class cloud::default {
     'telnet',
     'traceroute',
     'firewalld',
-    'screen'
+    'screen',
+    'cockpit'
     ]
 
   package {$dependencies:} ->
@@ -25,6 +26,11 @@ class cloud::default {
   }
 
   service { 'puppet':
+    ensure => 'running',
+    enable => 'true',
+  }
+
+  service { 'cockpit':
     ensure => 'running',
     enable => 'true',
   }
