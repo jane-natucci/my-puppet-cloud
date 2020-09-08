@@ -6,5 +6,6 @@ node 'www.natucci.de' {
 
 node 'puppet.natucci.de' {
   class {'::cloud::default':} ->
+  class {'::cloud::docker':} ->
   class {'::cloud::firewall::puppet':}
 }
