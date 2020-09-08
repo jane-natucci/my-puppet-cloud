@@ -38,6 +38,7 @@ pipeline {
         stage('puppet agent -t') {
             steps {
                 sh 'sudo /opt/puppetlabs/bin/puppet agent -t || true'
+                sh 'ssh root@natucci.de \'/opt/puppetlabs/bin/puppet agent -t || true\''
             }
         }
     }
