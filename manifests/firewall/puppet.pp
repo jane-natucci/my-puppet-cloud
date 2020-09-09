@@ -4,7 +4,7 @@ class cloud::firewall::puppet () inherits ::cloud::params {
     enable => true,
   }
 
-  firewalld_service {'SSH':
+  firewalld_service {'ssh':
     ensure  => present,
     service => 'ssh',
     require  => Service['firewalld'],

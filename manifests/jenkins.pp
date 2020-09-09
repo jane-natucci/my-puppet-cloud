@@ -1,9 +1,9 @@
 class cloud::jenkins {
   Exec {path => '/usr/bin'}
+  Package {ensure => present}
 
-  package {'java-1.8.0-openjdk.x86_64':
-    ensure => present,
-  }
+  package {'java-1.8.0-openjdk.x86_64':}
+  package {'rubygem-puppet-lint':}
 
   wget::fetch {'download jenkins repo':
     source      => 'https://pkg.jenkins.io/redhat-stable/jenkins.repo',
@@ -12,7 +12,6 @@ class cloud::jenkins {
   exec {'rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key':
   } ->
   package {'jenkins':
-    ensure => present,
     require => Package['java-1.8.0-openjdk.x86_64']
   } ->
   service {'jenkins':
@@ -42,29 +41,6 @@ class cloud::jenkins {
     mode    => '0644',
     require => [
       File['/var/lib/jenkins/.docker/'],
-    ]
-  }
-
-  package {'rubygem-puppet-lint':}
-
-  package {'maven':}
-
-  file {'/var/lib/jenkins/.m2':
-    ensure  => directory,
-    owner   => 'jenkins',
-    mode    => '0644',
-    require => [
-      File['/var/lib/jenkins/.docker/'],
-    ]
-  }
-
-  file {'/var/lib/jenkins/.m2/settings.xml':
-    ensure  => present,
-    source  => 'puppet:///modules/cloud/settings.xml',
-    owner   => 'jenkins',
-    mode    => '0644',
-    require => [
-      File['/var/lib/jenkins/.m2/'],
     ]
   }
 }
