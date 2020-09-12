@@ -20,4 +20,15 @@ class cloud::firewall::puppet () inherits ::cloud::params {
     action   => 'accept',
     require  => Service['firewalld'],
   }
+
+  firewalld_rich_rule {'Puppet server for elastic':
+    ensure   => present,
+    source   => "$::cloud::params::ip_elastic",
+    port     => {
+      port => '8140',
+      protocol => 'tcp',
+    },
+    action   => 'accept',
+    require  => Service['firewalld'],
+  }
 }
