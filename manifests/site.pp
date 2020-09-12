@@ -11,3 +11,8 @@ node 'puppet.natucci.de' {
   class {'::cloud::jenkins':} ->
   class {'::cloud::firewall::puppet':}
 }
+
+node 'elastic.natucci.de' {
+  class {'::cloud::default':} ->
+  class {'::cloud::elastic':}
+}
