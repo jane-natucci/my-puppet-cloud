@@ -39,6 +39,7 @@ pipeline {
             steps {
                 sh 'sudo /opt/puppetlabs/bin/puppet agent -t || true'
                 sh 'ssh root@natucci.de \'/opt/puppetlabs/bin/puppet agent -t || true\''
+                sh 'ssh root@elastic.natucci.de \'/opt/puppetlabs/bin/puppet agent -t || true\''
             }
         }
     }
