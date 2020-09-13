@@ -15,5 +15,5 @@ node 'puppet.natucci.de' {
 node 'elastic.natucci.de' {
   class {'::cloud::default':} ->
   class {'::cloud::elastic':} ->
-  class {'::cloud::firewall::elastic':} ->
+  class {'::cloud::firewall::elastic':}
 }
