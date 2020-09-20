@@ -43,4 +43,6 @@ class cloud::jenkins {
       File['/var/lib/jenkins/.docker/'],
     ]
   }
+
+  # add jenkins firewall.pp
 }
