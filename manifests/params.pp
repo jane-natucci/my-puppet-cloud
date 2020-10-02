@@ -1,5 +1,5 @@
 class cloud::params {
   $ip_puppet        = '88.99.190.92'
   $ip_www           = '116.203.82.3'
-  $ip_elasticsearch = '88.99.185.225'
+  $ip_elasticsearch = '195.201.28.90'
 }
