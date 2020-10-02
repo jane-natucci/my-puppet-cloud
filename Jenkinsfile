@@ -63,7 +63,7 @@ pipeline {
 
                     steps {
                         sh '''
-                        ssh root@elasticsearch.natucci.de '/opt/puppetlabs/bin/puppet agent -t || if [ $? -eq 2 ]; echo puppet agent -t executed successfully and some resources were updated; else exit $?; fi
+                        ssh root@elasticsearch.natucci.de '/opt/puppetlabs/bin/puppet agent -t' || if [ $? -eq 2 ]; echo puppet agent -t executed successfully and some resources were updated; else exit $?; fi
                         '''
                     }
                 }
