@@ -47,5 +47,9 @@ class cloud::elasticsearch {
   service {'elasticsearch':
     ensure => running,
     enable => true,
+  } ->
+  service {'kibana':
+    ensure => running,
+    enable => true,
   }
 }
