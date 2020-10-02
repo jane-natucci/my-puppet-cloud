@@ -41,6 +41,7 @@ pipeline {
                     agent any
 
                     steps {
+                        // jenkins is on the same server as puppet
                         sh 'sudo /opt/puppetlabs/bin/puppet agent -t'    
                     }
                 }
@@ -49,7 +50,15 @@ pipeline {
                     agent any
 
                     steps {
-                        sh 'ssh root@natucci.de \'/opt/puppetlabs/bin/puppet agent -t\''
+                        sh 'ssh root@www.natucci.de \'/opt/puppetlabs/bin/puppet agent -t\''
+                    }
+                }
+
+                stage('Run puppet on elasticsearch.natucci.de.') {
+                    agent any
+
+                    steps {
+                        sh 'ssh root@elasticsearch.natucci.de \'/opt/puppetlabs/bin/puppet agent -t\''
                     }
                 }
             }
