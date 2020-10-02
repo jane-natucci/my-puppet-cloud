@@ -80,7 +80,7 @@ class cloud::elasticsearch {
     enable => true,
     require => [
       Package['kibana'],
-      File['/etc/elasticsearch/kibana.yml']
+      File['/etc/kibana/kibana.yml']
     ]
   }
 }
