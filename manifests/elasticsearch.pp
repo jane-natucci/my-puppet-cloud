@@ -13,6 +13,33 @@ class cloud::elasticsearch {
     require => File['/etc/yum.repos.d/elasticsearch.repo'],
     ensure  => present,
   } ->
+  file {'/elasticsearch':
+    ensure => directory,
+    owner  => 'elasticsearch',
+    mode   => '0755'
+  } -> 
+  file {'/elasticsearch/log':
+    ensure => directory,
+    owner  => 'elasticsearch',
+    mode   => '0755'
+  } ->
+  file {'/elasticsearch/data':
+    ensure => directory,
+    owner  => 'elasticsearch',
+    mode   => '0755'
+  } ->
+  file {'/etc/elasticsearch/jvm.options.d/heapsize.options':
+    ensure => file,
+    source => 'puppet:///modules/cloud/heapsize.options',
+    owner  => 'elasticsearch',
+    mode   => '0660'
+  }
+  file {'/etc/elasticsearch/elasticsearch.yml':
+    ensure  => file,
+    content => template('elasticsearch.yml.erb'),
+    owner   => 'elasticsearch',
+    mode    => '0660',
+  } ->
   service {'elasticsearch':
     ensure => running,
     enable => true,
