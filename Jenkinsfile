@@ -42,7 +42,10 @@ pipeline {
 
                     steps {
                         // jenkins is on the same server as puppet
-                        sh 'sudo /opt/puppetlabs/bin/puppet agent -t'    
+                        sh '''                        
+                        /opt/puppetlabs/bin/puppet agent -t || result=$(echo $?)
+                        if [ $result -eq 0 ] || [ $result -eq 2]; then exit 0 fi
+                        '''
                     }
                 }
 
@@ -50,7 +53,9 @@ pipeline {
                     agent any
 
                     steps {
-                        sh 'ssh root@www.natucci.de \'/opt/puppetlabs/bin/puppet agent -t\''
+                        sh '''
+                        ssh root@www.natucci.de '/opt/puppetlabs/bin/puppet agent -t || result=$(echo $?); if [ $result -eq 0 ] || [ $result -eq 2]; then exit 0 fi'
+                        '''
                     }
                 }
 
@@ -58,7 +63,9 @@ pipeline {
                     agent any
 
                     steps {
-                        sh 'ssh root@elasticsearch.natucci.de \'/opt/puppetlabs/bin/puppet agent -t\''
+                        sh '''
+                        ssh root@elasticsearch.natucci.de '/opt/puppetlabs/bin/puppet agent -t || result=$(echo $?); if [ $result -eq 0 ] || [ $result -eq 2]; then exit 0 fi'
+                        '''
                     }
                 }
             }
