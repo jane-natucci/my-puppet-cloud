@@ -9,9 +9,9 @@ class cloud::elasticsearch {
   exec {'rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch':
     path => '/usr/bin',
   } ->
-  package {'elasticsearch':
-    require => File['/etc/yum.repos.d/elasticsearch.repo'],
+  package {'elasticsearch':    
     ensure  => present,
+    require => File['/etc/yum.repos.d/elasticsearch.repo'],
   }
   
   file {'/elasticsearch':
@@ -46,21 +46,25 @@ class cloud::elasticsearch {
     content => template('cloud/elasticsearch.yml.erb'),
     owner   => 'elasticsearch',
     mode    => '0660',
-    require => File['/elasticsearch/log'],
-    require => File['/elasticsearch/data'],
+    require => [
+      File['/elasticsearch/log'],
+      File['/elasticsearch/data']
+    ]
   }
 
   service {'elasticsearch':
     ensure => running,
     enable => true,
-    require => File['/etc/elasticsearch/elasticsearch.yml'],
-    require => File['/etc/elasticsearch/jvm.options.d/heapsize.options'],
-    require => Package['elasticsearch'],
+    require => [
+      File['/etc/elasticsearch/elasticsearch.yml'],
+      File['/etc/elasticsearch/jvm.options.d/heapsize.options'],
+      Package['elasticsearch']
+    ]
   }
   
   package {'kibana':
-    require => File['/etc/yum.repos.d/elasticsearch.repo'],
     ensure  => present,
+    require => File['/etc/yum.repos.d/elasticsearch.repo'],
   }
 
   file {'/etc/elasticsearch/kibana.yml':
@@ -74,7 +78,9 @@ class cloud::elasticsearch {
   service {'kibana':
     ensure => running,
     enable => true,
-    require => Package['kibana'],
-    require => File['/etc/elasticsearch/kibana.yml'],
+    require => [
+      Package['kibana'],
+      File['/etc/elasticsearch/kibana.yml']
+    ]
   }
 }
