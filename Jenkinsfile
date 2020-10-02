@@ -36,13 +36,19 @@ pipeline {
         }
 
         stage('Run puppet.') {
-            steps {
-                parallel  {
-                    jenkins: {
+            parallel  {
+                stage('Run puppet on jenkins.natucci.de.') {
+                    agent any
+
+                    steps {
                         sh 'sudo /opt/puppetlabs/bin/puppet agent -t'    
                     }
+                }
 
-                    www: {
+                stage('Run puppet on www.natucci.de.') {
+                    agent any
+
+                    steps {
                         sh 'ssh root@natucci.de \'/opt/puppetlabs/bin/puppet agent -t\''
                     }
                 }
