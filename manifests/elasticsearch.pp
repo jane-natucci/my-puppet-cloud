@@ -67,7 +67,7 @@ class cloud::elasticsearch {
     require => File['/etc/yum.repos.d/elasticsearch.repo'],
   }
 
-  file {'/etc/elasticsearch/kibana.yml':
+  file {'/etc/kibana/kibana.yml':
     ensure  => file,
     content => template('cloud/kibana.yml.erb'),
     owner   => 'kibana',
