@@ -36,7 +36,7 @@ class cloud::elasticsearch {
   }
   file {'/etc/elasticsearch/elasticsearch.yml':
     ensure  => file,
-    content => template('elasticsearch.yml.erb'),
+    content => template('cloud/elasticsearch.yml.erb'),
     owner   => 'elasticsearch',
     mode    => '0660',
   } ->
