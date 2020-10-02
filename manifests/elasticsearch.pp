@@ -1,4 +1,4 @@
-class cloud::elastic {
+class cloud::elasticsearch {
   file {'/etc/yum.repos.d/elasticsearch.repo':
     ensure  => present,
     source  => 'puppet:///modules/cloud/elasticsearch.repo',

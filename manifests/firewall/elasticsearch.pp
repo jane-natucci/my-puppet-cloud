@@ -1,4 +1,4 @@
-class cloud::firewall::elastic () inherits ::cloud::params {
+class cloud::firewall::elasticsearch () inherits ::cloud::params {
   service {'firewalld':
     ensure => running,
     enable => true,
