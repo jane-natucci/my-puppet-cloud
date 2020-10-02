@@ -13,6 +13,8 @@ node 'puppet.natucci.de' {
 }
 
 node 'elasticsearch.natucci.de' {
+  include ::cloud::params
+
   class {'::cloud::default':} ->
   class {'::cloud::elasticsearch':} ->
   class {'::cloud::firewall::elasticsearch':}
