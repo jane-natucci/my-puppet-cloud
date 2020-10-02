@@ -13,6 +13,10 @@ class cloud::elasticsearch {
     require => File['/etc/yum.repos.d/elasticsearch.repo'],
     ensure  => present,
   } ->
+  package {'kibana':
+    require => File['/etc/yum.repos.d/elasticsearch.repo'],
+    ensure  => present,
+  } ->
   file {'/elasticsearch':
     ensure => directory,
     owner  => 'elasticsearch',
