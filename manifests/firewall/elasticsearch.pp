@@ -10,11 +10,14 @@ class cloud::firewall::elasticsearch () inherits ::cloud::params {
     require  => Service['firewalld'],
   }
 
-  firewalld_port { 'Open port 9200 in the public zone':
+  firewalld_rich_rule {'Port 9200 for home IP':
     ensure   => present,
-    zone     => 'public',
-    port     => 9200,
-    protocol => 'tcp',
+    source   => "$::cloud::params::home_ip",
+    port     => {
+      port => '9200',
+      protocol => 'tcp',
+    },
+    action   => 'accept',
     require  => Service['firewalld'],
   }
 }
