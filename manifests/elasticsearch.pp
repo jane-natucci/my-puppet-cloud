@@ -37,11 +37,17 @@ class cloud::elasticsearch {
     source => 'puppet:///modules/cloud/heapsize.options',
     owner  => 'elasticsearch',
     mode   => '0660'
-  }
+  } ->
   file {'/etc/elasticsearch/elasticsearch.yml':
     ensure  => file,
     content => template('cloud/elasticsearch.yml.erb'),
     owner   => 'elasticsearch',
+    mode    => '0660',
+  } ->
+  file {'/etc/elasticsearch/kibana.yml':
+    ensure  => file,
+    content => template('cloud/kibana.yml.erb'),
+    owner   => 'kibana',
     mode    => '0660',
   } ->
   service {'elasticsearch':
