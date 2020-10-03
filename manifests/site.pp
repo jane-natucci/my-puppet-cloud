@@ -5,7 +5,6 @@ node 'www.natucci.de' {
   class {'::cloud::docker':} ->
   class {'::cloud::www':} ->
   class {'::cloud::metricbeat':} ->
-  class {'::cloud::filebeat':} ->
   class {'::cloud::firewall::www':}
 }
 

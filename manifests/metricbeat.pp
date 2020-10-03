@@ -8,6 +8,8 @@ class cloud::metricbeat {
     path => '/usr/bin',
   }
 
+  /* metricbeat */
+
   package {'metricbeat':
     ensure  => present,
     require => File['/etc/yum.repos.d/elasticsearch.repo'],
@@ -35,5 +37,12 @@ class cloud::metricbeat {
       Package['metricbeat'],
       Exec['metricbeat modules enable system'],
     ]
+  }
+
+  /* filebeat */
+
+  package {'filebeat':
+    ensure  => present,
+    require => File['/etc/yum.repos.d/elasticsearch.repo'],
   }
 }
