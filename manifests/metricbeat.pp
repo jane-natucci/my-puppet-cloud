@@ -22,7 +22,7 @@ class cloud::metricbeat {
     ensure  => file,
     content => template('cloud/metricbeat.yml.erb'),
     owner   => 'root',
-    mode    => '0660',
+    mode    => '0600',
     require => [
       Package['metricbeat']
     ]
