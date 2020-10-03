@@ -5,12 +5,13 @@ node 'www.natucci.de' {
   class {'::cloud::docker':} ->
   class {'::cloud::www':} ->
   class {'::cloud::metricbeat':} ->
+  class {'::cloud::filebeat':} ->
   class {'::cloud::firewall::www':}
 }
 
 node 'puppet.natucci.de' {
   include ::cloud::params
-  
+
   class {'::cloud::default':} ->
   class {'::cloud::docker':} ->
   class {'::cloud::jenkins':} ->
