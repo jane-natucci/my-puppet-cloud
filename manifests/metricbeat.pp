@@ -32,7 +32,7 @@ class cloud::metricbeat {
     ensure => running,
     enable => true,
     require => [
-      Package['metricbeat']
+      Package['metricbeat'],
       Exec['metricbeat modules enable system'],
     ]
   }
