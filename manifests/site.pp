@@ -1,4 +1,6 @@
 node 'www.natucci.de' {
+  include ::cloud::params
+
   class {'::cloud::default':} ->
   class {'::cloud::docker':} ->
   class {'::cloud::www':} ->
@@ -7,6 +9,8 @@ node 'www.natucci.de' {
 }
 
 node 'puppet.natucci.de' {
+  include ::cloud::params
+  
   class {'::cloud::default':} ->
   class {'::cloud::docker':} ->
   class {'::cloud::jenkins':} ->
