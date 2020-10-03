@@ -71,4 +71,14 @@ class cloud::metricbeat {
       Exec['filebeat modules enable haproxy'],
     ]
   }
+
+  service {'filebeat':
+    ensure => running,
+    enable => true,
+    require => [
+      Package['filebeat'],
+      File['/etc/filebeat/filebeat.yml'],
+      File['/etc/filebeat/modules.d/haproxy.yml'],
+    ]
+  }
 }
