@@ -46,6 +46,11 @@ class cloud::metricbeat {
     require => File['/etc/yum.repos.d/elasticsearch.repo'],
   }
 
+  exec {'filebeat modules enable haproxy':
+    path    => '/usr/bin:/usr/sbin',
+    require => Package['filebeat'],
+  }
+
   file {'/etc/filebeat/filebeat.yml':
     ensure  => file,
     content => template('cloud/filebeat.yml.erb'),
