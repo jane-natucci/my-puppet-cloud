@@ -25,7 +25,7 @@ class cloud::firewall::elasticsearch () inherits ::cloud::params {
   # kibana
   firewalld_rich_rule {'Port 9200 for www':
     ensure   => present,
-    source   => "$::cloud::params::www_ip",
+    source   => "$::cloud::params::ip_www",
     port     => {
       port => '9200',
       protocol => 'tcp',
