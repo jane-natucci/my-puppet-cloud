@@ -28,7 +28,6 @@ class cloud::metricbeat {
     ]
   }
 
-  /*
   service {'metricbeat':
     ensure => running,
     enable => true,
@@ -37,5 +36,4 @@ class cloud::metricbeat {
       Exec['metricbeat modules enable system'],
     ]
   }
-  */
 }
