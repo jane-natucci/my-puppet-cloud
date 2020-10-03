@@ -15,4 +15,8 @@ class cloud::firewall::www () inherits ::cloud::params {
     service => 'http',
     require  => Service['firewalld'],
   }
+
+  exec {'firewall-cmd --reload':
+    path => '/usr/bin',
+  }
 }

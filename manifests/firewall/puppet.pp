@@ -31,4 +31,8 @@ class cloud::firewall::puppet () inherits ::cloud::params {
     action   => 'accept',
     require  => Service['firewalld'],
   }
+
+  exec {'firewall-cmd --reload':
+    path => '/usr/bin',
+  }
 }
