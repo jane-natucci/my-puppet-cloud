@@ -45,4 +45,14 @@ class cloud::metricbeat {
     ensure  => present,
     require => File['/etc/yum.repos.d/elasticsearch.repo'],
   }
+
+  file {'/etc/filebeat/filebeat.yml':
+    ensure  => file,
+    content => template('cloud/filebeat.yml.erb'),
+    owner   => 'root',
+    mode    => '0600',
+    require => [
+      Package['filebeat']
+    ]
+  }
 }
