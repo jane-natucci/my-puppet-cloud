@@ -60,4 +60,15 @@ class cloud::metricbeat {
       Package['filebeat']
     ]
   }
+
+  file {'/etc/filebeat/modules.d/haproxy.yml':
+    ensure  => file,
+    content => template('cloud/haproxy.yml.erb'),
+    owner   => 'root',
+    mode    => '0644',
+    require => [
+      Package['filebeat'],
+      Exec['filebeat modules enable haproxy'],
+    ]
+  }
 }
