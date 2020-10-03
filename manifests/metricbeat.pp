@@ -73,7 +73,7 @@ class cloud::metricbeat {
   }
 
   service {'filebeat':
-    ensure => running,
+    ensure => stopped,
     enable => true,
     require => [
       Package['filebeat'],
