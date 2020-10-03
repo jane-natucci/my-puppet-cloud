@@ -18,6 +18,16 @@ class cloud::metricbeat {
     require => Package['metricbeat'],
   }
 
+  file {'/etc/metricbeat/metricbeat.yml':
+    ensure  => file,
+    content => template('cloud/metricbeat.yml.erb'),
+    owner   => 'metricbeat',
+    mode    => '0660',
+    require => [
+      Package['metricbeat']
+    ]
+  }
+
   /*
   service {'metricbeat':
     ensure => running,
