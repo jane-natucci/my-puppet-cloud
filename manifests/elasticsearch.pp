@@ -4,11 +4,10 @@ class cloud::elasticsearch {
     source  => 'puppet:///modules/cloud/elasticsearch.repo',
     owner   => 'root',
     mode    => '0644',
+  } -> exec {'rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch':
+    path => '/usr/bin',
   }
 
-  exec {'rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch':
-    path => '/usr/bin',
-  } ->
   package {'elasticsearch':    
     ensure  => present,
     require => File['/etc/yum.repos.d/elasticsearch.repo'],

@@ -2,6 +2,7 @@ node 'www.natucci.de' {
   class {'::cloud::default':} ->
   class {'::cloud::docker':} ->
   class {'::cloud::www':} ->
+  class {'::cloud::metricbeat':} ->
   class {'::cloud::firewall::www':}
 }
 
