@@ -1,14 +1,16 @@
+# Installs and configures metricbeat and filebeat.
+
 class cloud::metricbeat {
   file {'/etc/yum.repos.d/elasticsearch.repo':
-    ensure  => present,
-    source  => 'puppet:///modules/cloud/elasticsearch.repo',
-    owner   => 'root',
-    mode    => '0644',
+    ensure => present,
+    source => 'puppet:///modules/cloud/elasticsearch.repo',
+    owner  => 'root',
+    mode   => '0644',
   } -> exec {'rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch':
     path => '/usr/bin',
   }
 
-  /* metricbeat */
+  # metricbeat
 
   package {'metricbeat':
     ensure  => present,
@@ -31,15 +33,15 @@ class cloud::metricbeat {
   }
 
   service {'metricbeat':
-    ensure => running,
-    enable => true,
+    ensure  => running,
+    enable  => true,
     require => [
       Package['metricbeat'],
       Exec['metricbeat modules enable system'],
     ]
   }
 
-  /* filebeat */
+  # filebeat
 
   package {'filebeat':
     ensure  => present,
@@ -79,8 +81,8 @@ class cloud::metricbeat {
   }
 
   service {'filebeat':
-    ensure => running,
-    enable => true,
+    ensure  => running,
+    enable  => true,
     require => [
       Package['filebeat'],
       File['/etc/filebeat/filebeat.yml'],

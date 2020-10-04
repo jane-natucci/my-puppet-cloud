@@ -1,3 +1,5 @@
+## Default software to install on every node.
+
 class cloud::default {
   Package {ensure => present}
 
@@ -18,11 +20,16 @@ class cloud::default {
     'cockpit'
     ]
 
-  package {$dependencies:} ->
+  package {$dependencies:}
 
-  service {'sshd':
+  -> service {'sshd':
     ensure => running,
     enable => true,
+  }
+
+  -> service { 'cockpit':
+    ensure => 'running',
+    enable => 'true',
   }
 
   service { 'puppet':
@@ -30,38 +37,33 @@ class cloud::default {
     enable => 'true',
   }
 
-  service { 'cockpit':
-    ensure => 'running',
-    enable => 'true',
-  }
-
   file {'/root/.ssh/':
     ensure => directory
   }
-  
+
   file {'/root/.ssh/authorized_keys':
-    source => 'puppet:///modules/cloud/authorized_keys',
-    owner  => 0,
-    mode   => '0400',
-    ensure => present,
+    ensure  => present,
+    source  => 'puppet:///modules/cloud/authorized_keys',
+    owner   => 0,
+    mode    => '0400',
     require => File['/root/.ssh/']
   }
-  
+
   file {'/root/.vimrc':
-    source => 'puppet:///modules/cloud/.vimrc',
-    owner  => 0,
-    ensure => present,
+    ensure  => present,
+    source  => 'puppet:///modules/cloud/.vimrc',
+    owner   => 0,
     require => File['/root/.ssh/authorized_keys']
   }
 
-    wget::fetch {'download gitlab repo':
+  wget::fetch {'download gitlab repo':
     source      => 'https://raw.githubusercontent.com/GitAlias/gitalias/master/gitalias.txt',
     destination => '/root/gitalias.txt'
   }
 
   file {'/root/.gitconfig':
+    ensure => present,
     source => 'puppet:///modules/cloud/.gitconfig',
     owner  => 0,
-    ensure => present,
   }
 }

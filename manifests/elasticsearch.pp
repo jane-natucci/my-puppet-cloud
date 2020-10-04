@@ -1,35 +1,38 @@
+## Configuration for elasticsearch node.
+
 class cloud::elasticsearch {
   file {'/etc/yum.repos.d/elasticsearch.repo':
-    ensure  => present,
-    source  => 'puppet:///modules/cloud/elasticsearch.repo',
-    owner   => 'root',
-    mode    => '0644',
-  } -> exec {'rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch':
+    ensure => present,
+    source => 'puppet:///modules/cloud/elasticsearch.repo',
+    owner  => 'root',
+    mode   => '0644',
+  }
+  -> exec {'rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch':
     path => '/usr/bin',
   }
 
-  package {'elasticsearch':    
+  package {'elasticsearch':
     ensure  => present,
     require => File['/etc/yum.repos.d/elasticsearch.repo'],
   }
-  
+
   file {'/elasticsearch':
     ensure => directory,
     owner  => 'elasticsearch',
     mode   => '0755'
   }
-  
+
   file {'/elasticsearch/log':
-    ensure => directory,
-    owner  => 'elasticsearch',
-    mode   => '0755',
+    ensure  => directory,
+    owner   => 'elasticsearch',
+    mode    => '0755',
     require => File['/elasticsearch'],
   }
 
   file {'/elasticsearch/data':
-    ensure => directory,
-    owner  => 'elasticsearch',
-    mode   => '0755',
+    ensure  => directory,
+    owner   => 'elasticsearch',
+    mode    => '0755',
     require => File['/elasticsearch'],
   }
 
@@ -60,7 +63,7 @@ class cloud::elasticsearch {
       Package['elasticsearch']
     ]
   }
-  
+
   package {'kibana':
     ensure  => present,
     require => File['/etc/yum.repos.d/elasticsearch.repo'],
@@ -73,10 +76,10 @@ class cloud::elasticsearch {
     mode    => '0660',
     require => Package['kibana'],
   }
-  
+
   service {'kibana':
-    ensure => running,
-    enable => true,
+    ensure  => running,
+    enable  => true,
     require => [
       Package['kibana'],
       File['/etc/kibana/kibana.yml']

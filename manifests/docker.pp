@@ -1,3 +1,5 @@
+## Class used to install docker and required dependencies.
+
 class cloud::docker {
   Package {ensure => present}
   Exec {path => '/usr/bin:/usr/sbin'}
