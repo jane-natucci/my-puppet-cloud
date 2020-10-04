@@ -14,7 +14,7 @@ class cloud::firewall::puppet () inherits ::cloud::params {
 
   firewalld_rich_rule {'Puppet server for www':
     ensure  => present,
-    source  => ::cloud::params::ip_www,
+    source  => $::cloud::params::ip_www,
     port    => {
       port     => '8140',
       protocol => 'tcp',
@@ -25,7 +25,7 @@ class cloud::firewall::puppet () inherits ::cloud::params {
 
   firewalld_rich_rule {'Puppet server for elasticsearch':
     ensure  => present,
-    source  => ::cloud::params::ip_elasticsearch,
+    source  => $::cloud::params::ip_elasticsearch,
     port    => {
       port     => '8140',
       protocol => 'tcp',
