@@ -52,8 +52,8 @@ class cloud::elasticsearch {
   }
 
   service {'elasticsearch':
-    ensure => running,
-    enable => true,
+    ensure  => running,
+    enable  => true,
     require => [
       File['/etc/elasticsearch/elasticsearch.yml'],
       File['/etc/elasticsearch/jvm.options.d/heapsize.options'],

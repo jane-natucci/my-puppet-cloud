@@ -72,8 +72,14 @@ class cloud::metricbeat {
     ]
   }
 
+  exec {'filebeat setup -e && touch /root/filebeat_setup':
+    path    => '/usr/bin',
+    require => File['/etc/filebeat/filebeat.yml'],
+    unless  => 'ls /root/filebeat_setup',
+  }
+
   service {'filebeat':
-    ensure => stopped,
+    ensure => running,
     enable => true,
     require => [
       Package['filebeat'],
