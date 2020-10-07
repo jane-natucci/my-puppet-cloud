@@ -4,7 +4,6 @@ class cloud::default {
   Package {ensure => present}
 
   $dependencies = [
-    'epel-release',
     'wget',
     'net-tools',
     'bind-utils',
@@ -12,7 +11,6 @@ class cloud::default {
     'bash-completion',
     'vim-enhanced',
     'git',
-    'ipa-client',
     'telnet',
     'traceroute',
     'firewalld',
