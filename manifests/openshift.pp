@@ -1,7 +1,18 @@
 # Configuration for openshift server.
 
 class cloud::openshift {
-  package {'NetworkManager':
+  $dependencies = [
+    'NetworkManager',
+    'iptables-services',
+    'bridge-utils',
+    'kexec-tools',
+    'sos',
+    'psacct',
+    'python-ipaddress',
+    'centos-release-openshift-origin',
+    ]
+
+  package {$dependencies:
     ensure => present,
   }
 
