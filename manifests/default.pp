@@ -54,7 +54,7 @@ class cloud::default {
     require => File['/root/.ssh/authorized_keys']
   }
 
-  wget::fetch {'download gitlab repo':
+  wget::fetch {'download github repo':
     source      => 'https://raw.githubusercontent.com/GitAlias/gitalias/master/gitalias.txt',
     destination => '/root/gitalias.txt'
   }

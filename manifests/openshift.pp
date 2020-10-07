@@ -10,7 +10,8 @@ class cloud::openshift {
     'psacct',
     'python-ipaddress',
     'docker',
-#     'centos-release-openshift-origin39',
+    'centos-release-openshift-origin311',
+    'openshift-ansible',
     ]
 
   package {$dependencies:
