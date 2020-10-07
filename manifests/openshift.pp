@@ -60,7 +60,7 @@ class cloud::openshift {
     mode   => '0644',
   }
   -> exec {'rm -rf /etc/sysconfig/docker-storage*':
-    path   => '/usr/bin',
+    path   => '/usr/bin:/usr/sbin',
     unless => 'lvs /dev/docker/thinpool',
   }
 }
