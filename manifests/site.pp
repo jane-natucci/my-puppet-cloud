@@ -26,3 +26,10 @@ node 'elasticsearch.natucci.de' {
   -> class {'::cloud::elasticsearch':}
   -> class {'::cloud::firewall::elasticsearch':}
 }
+
+node 'openshift.natucci.de' {
+  include ::cloud::params
+
+  class {'::cloud::default':}
+  -> class {'::cloud::openshift':}
+}
