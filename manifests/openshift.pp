@@ -9,6 +9,7 @@ class cloud::openshift {
     'sos',
     'psacct',
     'python-ipaddress',
+    'docker',
     'centos-release-openshift-origin',
     ]
 
