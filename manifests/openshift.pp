@@ -42,7 +42,7 @@ class cloud::openshift {
   }
   -> file {'/etc/lvm/profile/docker-thinpool.profile':
     ensure  => present,
-    content => 'activation {\n thin_pool_autoextend_threshold = 75\n thin_pool_autoextend_percent = 25\n}',
+    content => "activation {\n thin_pool_autoextend_threshold = 75\n thin_pool_autoextend_percent = 25\n }",
     owner   => 0,
     mode    => '0644',
   }
