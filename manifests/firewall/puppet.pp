@@ -34,6 +34,17 @@ class cloud::firewall::puppet () inherits ::cloud::params {
     require => Service['firewalld'],
   }
 
+  firewalld_rich_rule {'Puppet server for openshift':
+    ensure  => present,
+    source  => $::cloud::params::ip_openshift,
+    port    => {
+      port     => '8140',
+      protocol => 'tcp',
+    },
+    action  => 'accept',
+    require => Service['firewalld'],
+  }
+
   exec {'firewall-cmd --reload':
     path => '/usr/bin',
   }

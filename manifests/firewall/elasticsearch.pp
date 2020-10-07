@@ -15,7 +15,7 @@ class cloud::firewall::elasticsearch () inherits ::cloud::params {
   # kibana for home ip
   firewalld_rich_rule {'Port 5601 for home IP':
     ensure  => present,
-    source  => $::cloud::params::home_ip,
+    source  => $::cloud::params::ip_home,
     port    => {
       port     => '5601',
       protocol => 'tcp',
