@@ -36,7 +36,7 @@ class cloud::firewall::elasticsearch () inherits ::cloud::params {
     require => Service['firewalld'],
   }
 
-  # kibana
+  # elasticsearch
   firewalld_rich_rule {'Port 9200 for www':
     ensure  => present,
     source  => $::cloud::params::ip_www,
