@@ -31,17 +31,11 @@ class cloud::openshift {
     ensure           => present,
     physical_volumes => '/dev/sdb',
   }
-  -> logical_volume {'thinpool':
-    ensure       => present,
-    volume_group => 'docker',
-    size         => '90%VG',
-    options      => '--wipesignatures y',
+  -> exec {'lvcreate --wipesignatures y -n thinpool docker -l 90%VG':
+    path => '/usr/bin',
   }
-  -> logical_volume {'thinpoolmeta':
-    ensure       => present,
-    volume_group => 'docker',
-    size         => '5%VG',
-    options      => '--wipesignatures y',
+  -> exec {'lvcreate --wipesignatures y -n thinpoolmeta docker -l 5%VG':
+    path => '/usr/bin',
   }
   -> exec {'lvconvert -y --zero n -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta':
     path => '/usr/sbin'
