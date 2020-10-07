@@ -40,7 +40,7 @@ class cloud::openshift {
     unless => 'lvs /dev/docker/thinpool',
   }
   -> exec {'lvconvert -y --zero n  -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta':
-    path   => '/usr/sbin'
+    path   => '/usr/sbin',
     unless => 'lvs /dev/docker/thinpool',
   }
   -> file {'/etc/lvm/profile/docker-thinpool.profile':
