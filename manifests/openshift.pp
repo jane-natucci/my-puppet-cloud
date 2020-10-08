@@ -91,7 +91,15 @@ class cloud::openshift {
     unless => 'true',
   }
 
-  exec {'ssh-copy-id -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa.pub openshift.natucci.de':
+  exec { 'ssh-keygen -f /root/.ssh/id_rsa -P \'\'':
+    path   => '/usr/bin',
+    unless => 'ls /root/.ssh/id_rsa',
+  }
+  -> exec {'echo \'\n\' >> /root/.ssh/authorized_keys && cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys':
+    path   => '/usr/bin',
+    unless => 'grep opneshift.natucci.de /root/.ssh/authorized_keys'
+  }
+  -> exec {'ssh-copy-id -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa.pub openshift.natucci.de':
     path   => '/usr/bin',
     unless => 'grep opneshift.natucci.de /root/.ssh/authorized_keys'
   }
