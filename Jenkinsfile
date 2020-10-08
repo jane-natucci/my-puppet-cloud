@@ -73,7 +73,7 @@ pipeline {
 
                     steps {
                         sh '''
-                        ssh root@openshift.natucci.de '/opt/puppetlabs/bin/puppet agent -t || if [ $? -eq 2 ]; then echo puppet agent -t executed successfully and some resources were updated; else exit $?; fi'
+                        ssh -o StrictHostKeyChecking=no root@openshift.natucci.de '/opt/puppetlabs/bin/puppet agent -t || if [ $? -eq 2 ]; then echo puppet agent -t executed successfully and some resources were updated; else exit $?; fi'
                         '''
                     }
                 }
