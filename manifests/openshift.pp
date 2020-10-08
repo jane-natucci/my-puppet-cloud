@@ -39,11 +39,11 @@ class cloud::openshift {
   }
   -> exec {'lvcreate --wipesignatures y -n thinpoolmeta docker -l 5%VG':
     path   => '/usr/sbin',
-    unless => 'lvs -a | grep -w thinpoolmeta',
+    unless => 'lvs -a | grep -w \'thinpoolmeta\\|thinpool_tmeta\'',
   }
   -> exec {'lvconvert -y --zero n  -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta':
     path   => '/usr/sbin',
-    unless => 'lvs -a | grep -w \'thinpoolmeta\\|thinpool_tmeta\'',
+    unless => 'lvs -a | grep -w thinpoolmeta',
   }
   -> file {'/etc/lvm/profile/docker-thinpool.profile':
     ensure  => present,
@@ -52,7 +52,7 @@ class cloud::openshift {
     mode    => '0644',
   }
   -> exec {'lvchange --metadataprofile docker-thinpool docker/thinpool':
-    path   => '/usr/sbin:/usr/bin',
+    path   => '/usr/sbin',
     unless => 'ls /root/docker-storage-configured',
   }
   -> file {'/etc/docker/daemon.json':
