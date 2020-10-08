@@ -42,11 +42,11 @@
 
 ## db-[99:101]-node.example.com
 
-[OSEv3:vars]
-openshift_master_default_subdomain=openshift.natucci.de
-openshift_deployment_type=origin
-openshift_metrics_install_metrics=true
-os_firewall_use_firewalld=True
+#[OSEv3:vars]
+#openshift_master_default_subdomain=openshift.natucci.de
+#openshift_deployment_type=origin
+#openshift_metrics_install_metrics=true
+#os_firewall_use_firewalld=True
 
 [masters]
 openshift.natucci.de openshift_public_hostname=openshift.natucci.de

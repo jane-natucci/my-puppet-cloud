@@ -72,4 +72,9 @@ class cloud::openshift {
     owner  => 0,
     mode   => '0644'
   }
+
+  exec { 'ssh-copy-id -i /root/id_rsa.pub openshift.natucci.de':
+    path   => '/usr/bin',
+    unless => 'grep opneshift.natucci.de /root/.ssh/authorized_keys'
+  }
 }
