@@ -2,7 +2,7 @@
 # https://docs.okd.io/3.11/install/running_install.html#running-the-advanced-installation-rpm
 
 class cloud::openshift {
-  file {'/etc/ansible/hosts':
+  file {'/etc/hosts':
     ensure  => file,
     content => template('cloud/etc_hosts.erb'),
     owner   => 0,
