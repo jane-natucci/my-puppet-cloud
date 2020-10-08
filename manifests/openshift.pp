@@ -43,7 +43,7 @@ class cloud::openshift {
   }
   -> exec {'lvconvert -y --zero n  -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta':
     path   => '/usr/sbin:/usr/bin',
-    unless => 'lvs -a | grep -w \'thinpoolmeta\\|thinpool_tmeta\'',
+    unless => 'lvs -a | grep -w thinpool_tmeta',
   }
   -> file {'/etc/lvm/profile/docker-thinpool.profile':
     ensure  => present,
