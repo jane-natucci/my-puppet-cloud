@@ -80,11 +80,12 @@ class cloud::openshift {
     mode    => '0644',
   }
 
+
   file {'/etc/ansible/hosts':
-    ensure => file,
-    source => 'puppet:///modules/cloud/hosts',
-    owner  => 0,
-    mode   => '0644'
+    ensure  => file,
+    content => template('cloud/hosts.erb'),
+    owner   => 0,
+    mode    => '0644'
   }
   -> exec {'ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml':
     path   => '/usr/bin',

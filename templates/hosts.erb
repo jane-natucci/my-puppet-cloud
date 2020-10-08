@@ -77,15 +77,15 @@ openshift_service_catalog_image_prefix=openshift/origin-
 openshift_service_catalog_image_version=latest
 
 [nodes]
-openshift.natucci.de openshift_node_group_name='node-config-all-in-one'
+openshift.natucci.de openshift_public_ip=<%= scope['cloud::params::ip_openshift'] %> openshift_ip=<%= scope['cloud::params::ip_openshift'] %> openshift_public_hostname=openshift.natucci.de openshift_hostname=openshift.natucci.de openshift_hosted_registry_storage_kind=nfs openshift_schedulable=True ansible_connection=local openshift_node_labesl="{'region': 'infra'}" openshift_node_group_name='node-config-all-in-one' 
 
 [masters]
-openshift.natucci.de openshift_public_hostname=openshift.natucci.de
+openshift.natucci.de openshift_public_ip=<%= scope['cloud::params::ip_openshift'] %> openshift_ip=<%= scope['cloud::params::ip_openshift'] %> openshift_public_hostname=openshift.natucci.de openshift_hostname=openshift.natucci.de
 
 [nfs]
-openshift.natucci.de openshift_public_hostname=openshift.natucci.de openshift_hostname=openshift.natucci.de openshift_hosted_registry_storage_kind=nfs ansible_connection=local
+openshift.natucci.de openshift_public_ip=<%= scope['cloud::params::ip_openshift'] %> openshift_ip=<%= scope['cloud::params::ip_openshift'] %> openshift_public_hostname=openshift.natucci.de openshift_hostname=openshift.natucci.de openshift_hosted_registry_storage_kind=nfs ansible_connection=local
 
 [etcd]
-openshift.natucci.de openshift_public_hostname=openshift.natucci.de openshift_hostname=openshift.natucci.de
+openshift.natucci.de openshift_public_ip=<%= scope['cloud::params::ip_openshift'] %> openshift_ip=<%= scope['cloud::params::ip_openshift'] %> openshift_public_hostname=openshift.natucci.de openshift_hostname=openshift.natucci.de openshift_hosted_registry_storage_kind=nfs ansible_connection=local
 
 [lb]
