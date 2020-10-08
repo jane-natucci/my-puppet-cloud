@@ -1,4 +1,5 @@
 # Configuration for openshift server.
+# https://docs.okd.io/3.11/install/running_install.html#running-the-advanced-installation-rpm
 
 class cloud::openshift {
   $dependencies = [
@@ -63,5 +64,12 @@ class cloud::openshift {
   -> exec {'rm -rf /etc/sysconfig/docker-storage*':
     path   => '/usr/bin:/usr/sbin',
     unless => 'lvs /dev/docker/thinpool',
+  }
+
+  file {'/etc/ansible/hosts':
+    ensure => file,
+    source => 'puppet:///modules/cloud/hosts',
+    owner  => 0,
+    mode   => '0644'
   }
 }
