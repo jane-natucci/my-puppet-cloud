@@ -61,9 +61,17 @@ class cloud::openshift {
     owner  => 0,
     mode   => '0644',
   }
-  -> exec {'rm -rf /etc/sysconfig/docker-storage*':
-    path   => '/usr/bin:/usr/sbin',
-    unless => 'lvs /dev/docker/thinpool',
+  -> file {'/etc/sysconfig/docker-storage-setup':
+    ensure  => present,
+    content => '',
+    owner   => 0,
+    mode    => '0644',
+  }
+  -> file {'/etc/sysconfig/docker-storage':
+    ensure  => present,
+    content => '',
+    owner   => 0,
+    mode    => '0644',
   }
 
   file {'/etc/ansible/hosts':
@@ -73,7 +81,7 @@ class cloud::openshift {
     mode   => '0644'
   }
 
-  exec { 'ssh-copy-id -i /root/.ssh/id_rsa.pub openshift.natucci.de':
+  exec {'ssh-copy-id -i /root/.ssh/id_rsa.pub openshift.natucci.de':
     path   => '/usr/bin',
     unless => 'grep opneshift.natucci.de /root/.ssh/authorized_keys'
   }
