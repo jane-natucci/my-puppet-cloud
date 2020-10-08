@@ -35,15 +35,15 @@ class cloud::openshift {
   }
   -> exec {'lvcreate --wipesignatures y -n thinpool docker -l 90%VG':
     path   => '/usr/sbin:/usr/bin',
-    unless => 'ls /root/docker-storage-configured',
+    unless => 'lvs | grep -w thinpool',
   }
   -> exec {'lvcreate --wipesignatures y -n thinpoolmeta docker -l 5%VG':
     path   => '/usr/sbin:/usr/bin',
-    unless => 'ls /root/docker-storage-configured',
+    unless => 'lvs | grep -w thinpoolmeta',
   }
   -> exec {'lvconvert -y --zero n  -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta':
     path   => '/usr/sbin:/usr/bin',
-    unless => 'ls /root/docker-storage-configured',
+    unless => 'lvs -a | grep -w thinpool_tmeta',
   }
   -> file {'/etc/lvm/profile/docker-thinpool.profile':
     ensure  => present,
@@ -91,7 +91,7 @@ class cloud::openshift {
     unless => 'true',
   }
 
-  exec {'ssh-copy-id -i /root/.ssh/id_rsa.pub openshift.natucci.de':
+  exec {'ssh-copy-id -o StrictHostKeyChecking=no -i /root/.ssh/id_rsa.pub openshift.natucci.de':
     path   => '/usr/bin',
     unless => 'grep opneshift.natucci.de /root/.ssh/authorized_keys'
   }
