@@ -60,6 +60,19 @@ openshift_disable_check=disk_availability,memory_availability,package_version
 openshift_deployment_type=origin
 openshift_metrics_install_metrics=true
 os_firewall_use_firewalld=True
+os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'
+openshift_portal_net=192.18.0.0/16
+osm_cluster_network_cidr=10.18.0.0/16
+
+openshift_hosted_etcd_storage_kind=nfs
+openshift_hosted_etcd_storage_nfs_options="*(rw,root_squash,sync,no_wdelay)"
+openshift_hosted_etcd_storage_nfs_directory=/opt/osev3-etcd
+openshift_hosted_etcd_storage_volume_name=etcd-vol2
+openshift_hosted_etcd_storage_access_modes=["ReadWriteOnce"]
+openshift_hosted_etcd_storage_volume_size=1G
+openshift_hosted_etcd_storage_labels={'storage': 'etcd'}
+openshift_service_catalog_image_prefix=openshift/origin-
+openshift_service_catalog_image_version=latest
 
 [nodes]
 openshift.natucci.de openshift_node_group_name='node-config-all-in-one'
