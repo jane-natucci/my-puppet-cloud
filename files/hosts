@@ -48,6 +48,7 @@ masters
 etcd
 
 [OSEv3:vars]
+ansible_ssh_user=root
 openshift_master_default_subdomain=openshift.natucci.de
 openshift_deployment_type=origin
 openshift_metrics_install_metrics=true
