@@ -46,6 +46,8 @@
 nodes
 masters
 etcd
+nfs
+lb
 
 [OSEv3:vars]
 ansible_ssh_user=root
@@ -80,5 +82,10 @@ openshift.natucci.de openshift_node_group_name='node-config-all-in-one'
 [masters]
 openshift.natucci.de openshift_public_hostname=openshift.natucci.de
 
+[nfs]
+openshift.natucci.de openshift_public_hostname=openshift.natucci.de openshift_hostname=openshift.natucci.de openshift_hosted_registry_storage_kind=nfs ansible_connection=local
+
 [etcd]
-openshift.natucci.de
+openshift.natucci.de openshift_public_hostname=openshift.natucci.de openshift_hostname=openshift.natucci.de
+
+[lb]
