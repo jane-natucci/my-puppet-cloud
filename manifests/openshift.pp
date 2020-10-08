@@ -86,6 +86,10 @@ class cloud::openshift {
     owner  => 0,
     mode   => '0644'
   }
+  -> exec {'ansible-playbook /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml':
+    path   => '/usr/bin',
+    unless => 'true',
+  }
 
   exec {'ssh-copy-id -i /root/.ssh/id_rsa.pub openshift.natucci.de':
     path   => '/usr/bin',

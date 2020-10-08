@@ -45,6 +45,7 @@
 [OSEv3:children]
 nodes
 masters
+etcd
 
 [OSEv3:vars]
 openshift_master_default_subdomain=openshift.natucci.de
@@ -57,3 +58,6 @@ openshift.natucci.de openshift_node_group_name='node-config-all-in-one'
 
 [masters]
 openshift.natucci.de openshift_public_hostname=openshift.natucci.de
+
+[etcd]
+openshift.natucci.de
