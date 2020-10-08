@@ -65,6 +65,7 @@ os_firewall_use_firewalld=True
 os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'
 openshift_portal_net=192.18.0.0/16
 osm_cluster_network_cidr=10.18.0.0/16
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
 
 openshift_hosted_etcd_storage_kind=nfs
 openshift_hosted_etcd_storage_nfs_options="*(rw,root_squash,sync,no_wdelay)"
