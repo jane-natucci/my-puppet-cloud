@@ -34,15 +34,15 @@ class cloud::openshift {
     physical_volumes => '/dev/sdb',
   }
   -> exec {'lvcreate --wipesignatures y -n thinpool docker -l 90%VG':
-    path   => '/usr/sbin',
+    path   => '/usr/sbin:/usr/bin',
     unless => 'ls /root/docker-storage-configured',
   }
   -> exec {'lvcreate --wipesignatures y -n thinpoolmeta docker -l 5%VG':
-    path   => '/usr/sbin',
+    path   => '/usr/sbin:/usr/bin',
     unless => 'ls /root/docker-storage-configured',
   }
   -> exec {'lvconvert -y --zero n  -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta':
-    path   => '/usr/sbin',
+    path   => '/usr/sbin:/usr/bin',
     unless => 'ls /root/docker-storage-configured',
   }
   -> file {'/etc/lvm/profile/docker-thinpool.profile':
@@ -52,7 +52,7 @@ class cloud::openshift {
     mode    => '0644',
   }
   -> exec {'lvchange --metadataprofile docker-thinpool docker/thinpool':
-    path   => '/usr/sbin',
+    path   => '/usr/sbin:/usr/bin',
     unless => 'ls /root/docker-storage-configured',
   }
   -> file {'/etc/docker/daemon.json':
