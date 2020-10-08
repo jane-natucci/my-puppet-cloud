@@ -35,15 +35,15 @@ class cloud::openshift {
   }
   -> exec {'lvcreate --wipesignatures y -n thinpool docker -l 90%VG':
     path   => '/usr/sbin',
-    unless => 'lvs /dev/docker/thinpool',
+    unless => 'ls /root/docker-storage-configured',
   }
   -> exec {'lvcreate --wipesignatures y -n thinpoolmeta docker -l 5%VG':
     path   => '/usr/sbin',
-    unless => 'lvs /dev/docker/thinpool',
+    unless => 'ls /root/docker-storage-configured',
   }
   -> exec {'lvconvert -y --zero n  -c 512K --thinpool docker/thinpool --poolmetadata docker/thinpoolmeta':
     path   => '/usr/sbin',
-    unless => 'lvs /dev/docker/thinpool',
+    unless => 'ls /root/docker-storage-configured',
   }
   -> file {'/etc/lvm/profile/docker-thinpool.profile':
     ensure  => present,
@@ -53,7 +53,7 @@ class cloud::openshift {
   }
   -> exec {'lvchange --metadataprofile docker-thinpool docker/thinpool':
     path   => '/usr/sbin',
-    unless => 'lvs /dev/docker/thinpool',
+    unless => 'ls /root/docker-storage-configured',
   }
   -> file {'/etc/docker/daemon.json':
     ensure => present,
@@ -68,6 +68,12 @@ class cloud::openshift {
     mode    => '0644',
   }
   -> file {'/etc/sysconfig/docker-storage':
+    ensure  => present,
+    content => '',
+    owner   => 0,
+    mode    => '0644',
+  }
+  -> file {'/root/docker-storage-configured':
     ensure  => present,
     content => '',
     owner   => 0,
