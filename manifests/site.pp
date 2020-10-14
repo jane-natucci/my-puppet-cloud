@@ -32,4 +32,5 @@ node 'openshift.natucci.de' {
 
   class {'::cloud::default':}
   -> class {'::cloud::openshift':}
+  -> class {'::cloud::firewall::openshift':}
 }
