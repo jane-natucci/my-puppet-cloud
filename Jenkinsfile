@@ -48,16 +48,6 @@ pipeline {
                     }
                 }
 
-                stage('Run puppet on www.natucci.de.') {
-                    agent any
-
-                    steps {
-                        sh '''
-                        ssh root@www.natucci.de '/opt/puppetlabs/bin/puppet agent -t || if [ $? -eq 2 ]; then echo puppet agent -t executed successfully and some resources were updated; else exit $?; fi'
-                        '''
-                    }
-                }
-
                 stage('Run puppet on elasticsearch.natucci.de.') {
                     agent any
 
