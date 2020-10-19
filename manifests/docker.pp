@@ -28,7 +28,6 @@ class cloud::docker {
     ensure  => 'running',
     enable  => true,
     require => [
-      File['/etc/docker/daemon.json'],
       File['/root/.docker/config.json'],
       Package['docker']
     ]
