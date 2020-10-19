@@ -24,14 +24,6 @@ class cloud::docker {
     ]
   }
 
-  file {'/etc/docker/daemon.json':
-    ensure  => present,
-    source  => 'puppet:///modules/cloud/daemon.json',
-    owner   => 0,
-    mode    => '0644',
-    require => Package['docker'],
-  }
-
   service {'docker':
     ensure  => 'running',
     enable  => true,
