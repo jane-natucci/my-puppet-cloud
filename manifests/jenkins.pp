@@ -30,23 +30,4 @@ class cloud::jenkins {
     owner  => 'jenkins',
     mode   => '0644',
   }
-
-  file {'/var/lib/jenkins/.docker':
-    ensure  => directory,
-    owner   => 'jenkins',
-    mode    => '0644',
-    require => [
-      File['/var/lib/jenkins'],
-    ]
-  }
-
-  file {'/var/lib/jenkins/.docker/config.json':
-    ensure  => present,
-    source  => 'puppet:///modules/cloud/config.json',
-    owner   => 'jenkins',
-    mode    => '0644',
-    require => [
-      File['/var/lib/jenkins/.docker/'],
-    ]
-  }
 }
