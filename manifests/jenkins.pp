@@ -20,6 +20,10 @@ class cloud::jenkins {
     ensure => running,
     enable => true,
   }
+  -> service {'httpd':
+    ensure => running,
+    enable => true,
+  }
 
   file {'/var/lib/jenkins':
     ensure => directory,
