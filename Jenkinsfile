@@ -52,9 +52,9 @@ pipeline {
                     agent any
 
                     steps {
-                        withCredentials([sshUserPrivateKey(credentialsId: "ssh-key-for-accessing-nodes", keyFileVariable: 'SSH_KEY_PATH')]) {
+                        withCredentials([sshUserPrivateKey(credentialsId: "ssh-key-for-accessing-nodes", keyFileVariable: '/tmp/jenkins_id_rsa')]) {
                             sh '''
-                            ssh -o StrictHostKeyChecking=no root@openshift.natucci.de '/opt/puppetlabs/bin/puppet agent -t || if [ $? -eq 2 ]; then echo puppet agent -t executed successfully and some resources were updated; else exit $?; fi'
+                            ssh -i /tmp/jenkins_id_rsa -o StrictHostKeyChecking=no root@openshift.natucci.de '/opt/puppetlabs/bin/puppet agent -t || if [ $? -eq 2 ]; then echo puppet agent -t executed successfully and some resources were updated; else exit $?; fi'
                             '''
                         }
                     }
