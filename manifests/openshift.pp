@@ -117,6 +117,19 @@ class cloud::openshift {
     ensure => directory,
     owner  => 'nfsnobody',
     group  => 'nfsnobody',
-    mode   => '0777'
+    mode   => '0777',
+  }
+  -> exec {'semanage fcontext -a -t public_content_rw_t "/exports/os-persistent-storage(/.*)?"':
+    path => '/usr/sbin',
+  }
+  -> exec {'restorecon -R /exports/os-persistent-storage':
+    path => '/usr/sbin',
+  }
+  -> exec {'echo "/exports/os-persistent-storage openshift.natucci.de(rw,no_root_squash)" >> /etc/exports':
+    path   => '/usr/bin',
+    unless => 'grep os-persistent-storage /etc/exports',
+  }
+  -> exec {'exportfs -avr':
+    path => '/usr/sbin',
   }
 }
