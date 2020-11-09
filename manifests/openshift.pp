@@ -143,7 +143,7 @@ class cloud::openshift {
   }
   -> exec {'echo "/exports/mariadb-persistent openshift.natucci.de(rw,no_root_squash)" >> /etc/exports':
     path   => '/usr/bin',
-    unless => 'grep os-persistent-storage /etc/exports',
+    unless => 'grep mariadb-persistent /etc/exports',
   }
   -> exec {'exportfs -avr':
     path => '/usr/sbin',
