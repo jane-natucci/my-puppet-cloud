@@ -129,6 +129,22 @@ class cloud::openshift {
     path   => '/usr/bin',
     unless => 'grep os-persistent-storage /etc/exports',
   }
+  -> file { '/exports/mariadb-persistent':
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {'semanage fcontext -a -t public_content_rw_t "/exports/mariadb-persistent(/.*)?"':
+    path => '/usr/sbin',
+  }
+  -> exec {'restorecon -R /exports/mariadb-persistent':
+    path => '/usr/sbin',
+  }
+  -> exec {'echo "/exports/mariadb-persistent openshift.natucci.de(rw,no_root_squash)" >> /etc/exports':
+    path   => '/usr/bin',
+    unless => 'grep os-persistent-storage /etc/exports',
+  }
   -> exec {'exportfs -avr':
     path => '/usr/sbin',
   }
