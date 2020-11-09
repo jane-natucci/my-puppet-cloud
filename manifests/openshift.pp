@@ -111,4 +111,12 @@ class cloud::openshift {
     path   => '/usr/bin',
     unless => 'grep opneshift.natucci.de /root/.ssh/authorized_keys'
   }
+
+  # Persistent NFS storage
+  file { '/exports/os-persistent-storage':
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777'
+  }
 }
