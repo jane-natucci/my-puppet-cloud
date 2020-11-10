@@ -30,4 +30,10 @@ class cloud::jenkins {
     owner  => 'jenkins',
     mode   => '0644',
   }
+
+  file {'/tmp/temporary':
+    ensure => directory,
+    owner  => 'root',
+    mode   => '0644',
+  }
 }
