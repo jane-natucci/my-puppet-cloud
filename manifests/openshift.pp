@@ -148,4 +148,23 @@ class cloud::openshift {
   -> exec {'exportfs -avr':
     path => '/usr/sbin',
   }
+  -> file { '/exports/postgres-persistent':
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {'semanage fcontext -a -t public_content_rw_t "/exports/postgres-persistent(/.*)?"':
+    path => '/usr/sbin',
+  }
+  -> exec {'restorecon -R /exports/postgres-persistent':
+    path => '/usr/sbin',
+  }
+  -> exec {'echo "/exports/postgres-persistent openshift.natucci.de(rw,no_root_squash)" >> /etc/exports':
+    path   => '/usr/bin',
+    unless => 'grep postgres-persistent /etc/exports',
+  }
+  -> exec {'exportfs -avr':
+    path => '/usr/sbin',
+  }
 }
