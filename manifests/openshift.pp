@@ -145,9 +145,6 @@ class cloud::openshift {
     path   => '/usr/bin',
     unless => 'grep mariadb-persistent /etc/exports',
   }
-  -> exec {'exportfs -avr':
-    path => '/usr/sbin',
-  }
   -> file { '/exports/postgres-persistent':
     ensure => directory,
     owner  => 'nfsnobody',
