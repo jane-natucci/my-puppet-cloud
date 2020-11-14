@@ -39,8 +39,4 @@ class cloud::jenkins {
     path   => '/usr/bin',
     unless => 'ls /usr/local/bin/terraform'
   }
-
-  class { 'postgresql::server':
-    ip_mask_allow_all_users => '0.0.0.0/0',
-  }
 }
