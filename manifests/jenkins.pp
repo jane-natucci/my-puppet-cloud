@@ -44,5 +44,6 @@ class cloud::jenkins {
     ip_mask_deny_postgres_user => '0.0.0.0/32',
     ip_mask_allow_all_users    => '0.0.0.0/0',
     ipv4acls                   => ['host all blog 0.0.0.0/0 md5'],
+    listen_addresses           => '*',
   }
 }
