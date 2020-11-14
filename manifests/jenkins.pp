@@ -30,4 +30,13 @@ class cloud::jenkins {
     owner  => 'jenkins',
     mode   => '0644',
   }
+
+  wget::fetch {'download terraform':
+    source      => 'https://releases.hashicorp.com/terraform/0.13.5/terraform_0.13.5_linux_amd64.zip',
+    destination => '/root/terraform.zip',
+  }
+  -> exec {'unzip /root/terraform.zip -d /usr/local/bin/':
+    path   => '/usr/bin',
+    unless => 'ls /usr/local/bin/terraform'
+  }
 }
