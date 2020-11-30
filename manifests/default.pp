@@ -26,8 +26,8 @@ class cloud::default {
   }
 
   -> service { 'cockpit':
-    ensure => 'running',
-    enable => 'true',
+    ensure => 'stopped',
+    enable => 'false',
   }
 
   service { 'puppet':
