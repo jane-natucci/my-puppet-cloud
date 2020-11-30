@@ -28,7 +28,7 @@ class cloud::openshift {
   $nifi_content_repo_storage = '/exports/nifi/contentRepoStorage'
   $nifi_provenance_repo_storage = '/exports/nifi/provenanceRepoStorage'
   $nifi_log_storage = '/exports/nifi/logStorage'
-  $k8sdynamic = '/export/k8sdynamic'
+  $k8sdynamic = '/exports/k8sdynamic'
 
   package {$dependencies:
     ensure => present,
