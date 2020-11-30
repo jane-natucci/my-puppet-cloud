@@ -164,4 +164,95 @@ class cloud::openshift {
   -> exec {'exportfs -avr':
     path => '/usr/sbin',
   }
+
+  $nifi_config_storage = '/exports/nifi/configStorage'
+  $nifi_authconf_storage = '/exports/nifi/authconfStorage'
+  $nifi_data_storage = '/exports/nifi/dataStorage'
+  $nifi_flowfile_repo_storage = '/exports/nifi/flowfileRepoStorage'
+  $nifi_content_repo_storage = '/exports/nifi/contentRepoStorage'
+  $nifi_provenance_repo_storage = '/exports/nifi/provenanceRepoStorage'
+
+  $nifi_log_storage = '/exports/nifi/logStorage'
+
+  file { '/exports/nifi':
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  # begin
+  -> file { $nifi_config_storage:
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {"echo \"${nifi_config_storage} openshift.natucci.de(rw,no_root_squash)\" >> /etc/exports":
+    path   => '/usr/bin',
+    unless => "grep ${nifi_config_storage} /etc/exports",
+  }
+  -> file { $nifi_authconf_storage:
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {"echo \"${nifi_authconf_storage} openshift.natucci.de(rw,no_root_squash)\" >> /etc/exports":
+    path   => '/usr/bin',
+    unless => "grep ${nifi_authconf_storage} /etc/exports",
+  }
+  -> file { $nifi_data_storage:
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {"echo \"${nifi_data_storage} openshift.natucci.de(rw,no_root_squash)\" >> /etc/exports":
+    path   => '/usr/bin',
+    unless => "grep ${nifi_data_storage} /etc/exports",
+  }
+  -> file { $nifi_flowfile_repo_storage:
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {"echo \"${nifi_flowfile_repo_storage} openshift.natucci.de(rw,no_root_squash)\" >> /etc/exports":
+    path   => '/usr/bin',
+    unless => "grep ${nifi_flowfile_repo_storage} /etc/exports",
+  }
+  -> file { $nifi_content_repo_storage:
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {"echo \"${nifi_content_repo_storage} openshift.natucci.de(rw,no_root_squash)\" >> /etc/exports":
+    path   => '/usr/bin',
+    unless => "grep ${nifi_content_repo_storage} /etc/exports",
+  }
+  -> file { $nifi_provenance_repo_storage:
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {"echo \"${nifi_provenance_repo_storage} openshift.natucci.de(rw,no_root_squash)\" >> /etc/exports":
+    path   => '/usr/bin',
+    unless => "grep ${nifi_provenance_repo_storage} /etc/exports",
+  }
+  -> file { $nifi_log_storage:
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {"echo \"${nifi_log_storage} openshift.natucci.de(rw,no_root_squash)\" >> /etc/exports":
+    path   => '/usr/bin',
+    unless => "grep ${nifi_log_storage} /etc/exports",
+  }
+  # end
+  -> exec {'exportfs -avr':
+    path => '/usr/sbin',
+  }
 }
