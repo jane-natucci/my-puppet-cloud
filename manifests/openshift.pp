@@ -21,6 +21,14 @@ class cloud::openshift {
     'centos-release-openshift-origin311',
     'openshift-ansible',
     ]
+  $nifi_config_storage = '/exports/nifi/configStorage'
+  $nifi_authconf_storage = '/exports/nifi/authconfStorage'
+  $nifi_data_storage = '/exports/nifi/dataStorage'
+  $nifi_flowfile_repo_storage = '/exports/nifi/flowfileRepoStorage'
+  $nifi_content_repo_storage = '/exports/nifi/contentRepoStorage'
+  $nifi_provenance_repo_storage = '/exports/nifi/provenanceRepoStorage'
+  $nifi_log_storage = '/exports/nifi/logStorage'
+  $k8sdynamic = '/export/k8sdynamic'
 
   package {$dependencies:
     ensure => present,
@@ -161,17 +169,7 @@ class cloud::openshift {
     path   => '/usr/bin',
     unless => 'grep postgres-persistent /etc/exports',
   }
-
-  $nifi_config_storage = '/exports/nifi/configStorage'
-  $nifi_authconf_storage = '/exports/nifi/authconfStorage'
-  $nifi_data_storage = '/exports/nifi/dataStorage'
-  $nifi_flowfile_repo_storage = '/exports/nifi/flowfileRepoStorage'
-  $nifi_content_repo_storage = '/exports/nifi/contentRepoStorage'
-  $nifi_provenance_repo_storage = '/exports/nifi/provenanceRepoStorage'
-
-  $nifi_log_storage = '/exports/nifi/logStorage'
-
-  file { '/exports/nifi':
+  -> file { '/exports/nifi':
     ensure => directory,
     owner  => 'nfsnobody',
     group  => 'nfsnobody',
@@ -248,8 +246,18 @@ class cloud::openshift {
     path   => '/usr/bin',
     unless => "grep ${nifi_log_storage} /etc/exports",
   }
+  -> file { $k8sdynamic:
+    ensure => directory,
+    owner  => 'nfsnobody',
+    group  => 'nfsnobody',
+    mode   => '0777',
+  }
+  -> exec {"echo \"${k8sdynamic} openshift.natucci.de(rw,no_root_squash)\" >> /etc/exports":
+    path   => '/usr/bin',
+    unless => "grep ${k8sdynamic} /etc/exports",
+  }
   # end
-  exec {'exportfs -avr':
+  -> exec {'exportfs -avr':
     path => '/usr/sbin',
   }
 }
