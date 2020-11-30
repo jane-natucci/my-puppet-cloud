@@ -161,9 +161,6 @@ class cloud::openshift {
     path   => '/usr/bin',
     unless => 'grep postgres-persistent /etc/exports',
   }
-  -> exec {'exportfs -avr':
-    path => '/usr/sbin',
-  }
 
   $nifi_config_storage = '/exports/nifi/configStorage'
   $nifi_authconf_storage = '/exports/nifi/authconfStorage'
@@ -252,7 +249,7 @@ class cloud::openshift {
     unless => "grep ${nifi_log_storage} /etc/exports",
   }
   # end
-  -> exec {'exportfs -avr':
+  exec {'exportfs -avr':
     path => '/usr/sbin',
   }
 }
