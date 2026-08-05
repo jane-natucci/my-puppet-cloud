@@ -1,0 +1,4 @@
+# Prevent GitHub Linguist from classifying this Puppet module as HTML.
+# ERB templates default to the "HTML+ERB" language (grouped under HTML),
+# which otherwise dominates the repo's language stats.
+*.erb linguist-language=Puppet
